@@ -827,6 +827,13 @@
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/main/CMakeFiles/install.dir
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/main/CMakeFiles/install/local.dir
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/main/CMakeFiles/install/strip.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/my_i2c/CMakeFiles/__idf_my_i2c.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/my_i2c/CMakeFiles/edit_cache.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/my_i2c/CMakeFiles/rebuild_cache.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/my_i2c/CMakeFiles/list_install_components.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/my_i2c/CMakeFiles/install.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/my_i2c/CMakeFiles/install/local.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/my_i2c/CMakeFiles/install/strip.dir
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/mpu9250/CMakeFiles/__idf_mpu9250.dir
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/mpu9250/CMakeFiles/edit_cache.dir
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/mpu9250/CMakeFiles/rebuild_cache.dir

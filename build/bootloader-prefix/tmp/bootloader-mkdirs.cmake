@@ -3,8 +3,13 @@
 
 cmake_minimum_required(VERSION 3.5)
 
+# If CMAKE_DISABLE_SOURCE_CHANGES is set to true and the source directory is an
+# existing directory in our source tree, calling file(MAKE_DIRECTORY) on it
+# would cause a fatal error, even though it would be a no-op.
+if(NOT EXISTS "/media/diego/Diego/esp/esp-idf/components/bootloader/subproject")
+  file(MAKE_DIRECTORY "/media/diego/Diego/esp/esp-idf/components/bootloader/subproject")
+endif()
 file(MAKE_DIRECTORY
-  "/media/diego/Diego/esp/esp-idf/components/bootloader/subproject"
   "/home/diego/workspace/ESP32-C3-MPU9250/build/bootloader"
   "/home/diego/workspace/ESP32-C3-MPU9250/build/bootloader-prefix"
   "/home/diego/workspace/ESP32-C3-MPU9250/build/bootloader-prefix/tmp"

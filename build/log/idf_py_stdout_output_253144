@@ -1,0 +1,11 @@
+Command: ninja flash
+[0/1] Re-running CMake...
+-- Minimal build - ON
+-- git rev-parse returned 'fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).'
+-- Could not use 'git describe' to determine PROJECT_VER.
+-- Building ESP-IDF components for target esp32c3
+Invalid field "dependencies": Input should be a valid dictionary
+-- Configuring incomplete, errors occurred!
+FAILED: build.ninja 
+/home/diego/.espressif/tools/cmake/3.30.2/bin/cmake --regenerate-during-build -S/home/diego/workspace/ESP32-C3-MPU9250 -B/home/diego/workspace/ESP32-C3-MPU9250/build

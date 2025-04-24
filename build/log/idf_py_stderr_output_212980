@@ -1,0 +1,70 @@
+Command: ninja confserver
+warning: the default selection I2CBUS_LOG_RW_LEVEL_VERBOSE (defined at /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig.projbuild:29, /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig:29) of <choice> (defined at /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig.projbuild:18) is not contained in the choice
+warning: the choice symbol I2CBUS_LOG_RW_LEVEL_INFO (defined at /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig.projbuild:25, /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig:25) is defined with a prompt outside the choice
+warning: the choice symbol I2CBUS_LOG_RW_LEVEL_DEBUG (defined at /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig.projbuild:27, /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig:27) is defined with a prompt outside the choice
+warning: the choice symbol I2CBUS_LOG_RW_LEVEL_VERBOSE (defined at /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig.projbuild:29, /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig:29) is defined with a prompt outside the choice
+warning: the choice symbol I2CBUS_LOG_RW_LEVEL_INFO (defined at /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig.projbuild:25, /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig:25) is defined with a prompt outside the choice
+warning: the choice symbol I2CBUS_LOG_RW_LEVEL_DEBUG (defined at /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig.projbuild:27, /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig:27) is defined with a prompt outside the choice
+warning: the choice symbol I2CBUS_LOG_RW_LEVEL_VERBOSE (defined at /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig.projbuild:29, /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig:29) is defined with a prompt outside the choice
+info: INFO: Symbol I2CBUS_LOG_ERRORS defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig:3
+    /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig.projbuild:3
+info: INFO: Symbol I2CBUS_LOG_READWRITES defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig:10
+    /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig.projbuild:10
+info: INFO: Symbol I2CBUS_LOG_RW_LEVEL_INFO defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig:25
+    /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig.projbuild:25
+info: INFO: Symbol I2CBUS_LOG_RW_LEVEL_DEBUG defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig:27
+    /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig.projbuild:27
+info: INFO: Symbol I2CBUS_LOG_RW_LEVEL_VERBOSE defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig.projbuild:29
+    /home/diego/workspace/ESP32-C3-MPU9250/components/I2Cbus/Kconfig:29
+info: INFO: Symbol MPU6000 defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:39
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:39
+info: INFO: Symbol MPU6050 defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:41
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:41
+info: INFO: Symbol MPU6500 defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:43
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:43
+info: INFO: Symbol MPU6555 defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:45
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:45
+info: INFO: Symbol MPU9150 defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:47
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:47
+info: INFO: Symbol MPU9250 defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:49
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:49
+info: INFO: Symbol MPU9255 defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:51
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:51
+info: INFO: Symbol MPU_CHIP_MODEL defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:57
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:57
+info: INFO: Symbol MPU_AK8963 defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:68
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:68
+info: INFO: Symbol MPU_AK8975 defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:73
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:73
+info: INFO: Symbol MPU_AK89xx defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:78
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:78
+info: INFO: Symbol MPU_I2C defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:90
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:90
+info: INFO: Symbol MPU_SPI defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:95
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:95
+info: INFO: Symbol MPU_COMM_PROTOCOL defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:104
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:104
+info: INFO: Symbol MPU_LOG_LEVEL_DEFAULT defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig:117
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:117
+info: INFO: Symbol MPU_LOG_LEVEL_NONE defined in multiple locations (see below). Please check if this is a correct behavior or a random name match:
+    /home/diego/workspace/ESP32-C3-MPU9250/components/MPUdriver/Kconfig.projbuild:122

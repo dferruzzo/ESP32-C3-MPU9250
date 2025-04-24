@@ -1,0 +1,10 @@
+Command: ninja flash
+CMake Error at /media/diego/Diego/esp/esp-idf/tools/cmake/build.cmake:621 (message):
+  ERROR: Manifest is not valid
+
+Call Stack (most recent call first):
+  /media/diego/Diego/esp/esp-idf/tools/cmake/project.cmake:736 (idf_build_process)
+  CMakeLists.txt:8 (project)
+
+
+ninja: error: rebuilding 'build.ninja': subcommand failed

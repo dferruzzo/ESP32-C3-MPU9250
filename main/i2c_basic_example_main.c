@@ -19,17 +19,22 @@
 #include "mpu9250.h"
 #include "my_i2c.h"
 
-    void app_main() {
+void app_main() {
     i2c_master_bus_handle_t bus_handle;
     i2c_master_dev_handle_t dev_handle;
 
     // Initialize I2C using my_i2c component
-    ESP_ERROR_CHECK(my_i2c_init(&bus_handle, &dev_handle, I2C_MASTER_SDA_IO, I2C_MASTER_SCL_IO, I2C_MASTER_FREQ_HZ, MPU9250_SENSOR_ADDR));
+    ESP_ERROR_CHECK(my_i2c_init(&bus_handle, &dev_handle, I2C_MASTER_SDA_IO, 
+        I2C_MASTER_SCL_IO, I2C_MASTER_FREQ_HZ, MPU9250_SENSOR_ADDR));
     
     // Use the MPU9250 component
     mpu9250_log_who_am_i(dev_handle);
 
-    // Deinitialize I2C using my_i2c component
+  // Configure gyroscope settings
+    uint8_t gyro_config = 0x18; // Example configuration value
+	mpu9250_configure_gyroscope(dev_handle, gyro_config);
+
+	// Deinitialize I2C using my_i2c component
     ESP_ERROR_CHECK(my_i2c_deinit(bus_handle, dev_handle));
 
 }

@@ -19,6 +19,8 @@ extern "C" {
 esp_err_t mpu9250_read_register(i2c_master_dev_handle_t dev_handle, uint8_t reg_addr, uint8_t *data, size_t len);
 esp_err_t mpu9250_write_register(i2c_master_dev_handle_t dev_handle, uint8_t reg_addr, uint8_t data);
 void mpu9250_log_who_am_i(i2c_master_dev_handle_t dev_handle);
+esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle,
+									uint8_t gyro_config);
 
 #ifdef __cplusplus
 }

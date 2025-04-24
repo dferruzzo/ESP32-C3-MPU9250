@@ -5745,89 +5745,39 @@
                 "type": "int"
             },
             {
-                "children": [
-                    {
-                        "children": [],
-                        "depends_on": "<choice BLINK_LED>",
-                        "help": null,
-                        "id": "BLINK_LED_GPIO",
-                        "name": "BLINK_LED_GPIO",
-                        "range": null,
-                        "title": "GPIO",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "<choice BLINK_LED>",
-                        "help": null,
-                        "id": "BLINK_LED_STRIP",
-                        "name": "BLINK_LED_STRIP",
-                        "range": null,
-                        "title": "LED strip",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": null,
-                "help": "Select the LED type. A normal level controlled LED or an addressable LED strip.\nThe default selection is based on the Espressif DevKit boards.\nYou can change the default selection according to your board.",
-                "id": "example-configuration-blink-led-type",
-                "name": "BLINK_LED",
-                "title": "Blink LED type",
-                "type": "choice"
-            },
-            {
-                "children": [
-                    {
-                        "children": [],
-                        "depends_on": "SOC_RMT_SUPPORTED && <choice BLINK_LED_STRIP_BACKEND>",
-                        "help": null,
-                        "id": "BLINK_LED_STRIP_BACKEND_RMT",
-                        "name": "BLINK_LED_STRIP_BACKEND_RMT",
-                        "range": null,
-                        "title": "RMT",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "<choice BLINK_LED_STRIP_BACKEND>",
-                        "help": null,
-                        "id": "BLINK_LED_STRIP_BACKEND_SPI",
-                        "name": "BLINK_LED_STRIP_BACKEND_SPI",
-                        "range": null,
-                        "title": "SPI",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": "BLINK_LED_STRIP",
-                "help": "Select the backend peripheral to drive the LED strip.",
-                "id": "example-configuration-led-strip-backend-peripheral",
-                "name": "BLINK_LED_STRIP_BACKEND",
-                "title": "LED strip backend peripheral",
-                "type": "choice"
-            },
-            {
                 "children": [],
                 "depends_on": null,
-                "help": "GPIO number (IOxx) to blink on and off the LED.\nSome GPIOs are used for other purposes (flash connections, etc.) and cannot be used to blink.",
-                "id": "BLINK_GPIO",
-                "name": "BLINK_GPIO",
+                "help": "GPIO number for I2C Master clock line.",
+                "id": "I2C_MASTER_SCL",
+                "name": "I2C_MASTER_SCL",
                 "range": [
                     0,
                     19
                 ],
-                "title": "Blink GPIO number",
+                "title": "SCL GPIO Num",
                 "type": "int"
             },
             {
                 "children": [],
                 "depends_on": null,
-                "help": "Define the blinking period in milliseconds.",
-                "id": "BLINK_PERIOD",
-                "name": "BLINK_PERIOD",
+                "help": "GPIO number for I2C Master data line.",
+                "id": "I2C_MASTER_SDA",
+                "name": "I2C_MASTER_SDA",
                 "range": [
-                    10,
-                    3600000
+                    0,
+                    19
                 ],
-                "title": "Blink period in ms",
+                "title": "SDA GPIO Num",
+                "type": "int"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": "I2C Speed of Master device.",
+                "id": "I2C_MASTER_FREQUENCY",
+                "name": "I2C_MASTER_FREQUENCY",
+                "range": null,
+                "title": "Master Frequency",
                 "type": "int"
             }
         ],

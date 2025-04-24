@@ -77,5 +77,5 @@
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/rt/librt.a
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/spiffs/libspiffs.a
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/wifi_provisioning/libwifi_provisioning.a
-/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/espressif__led_strip/libespressif__led_strip.a
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/main/libmain.a
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/mpu9250/libmpu9250.a

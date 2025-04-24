@@ -22,4 +22,4 @@ set confirm off
 set confirm on
 
 # Load application symbols
-file /home/diego/workspace/ESP32-C3-MPU9250/build/esp32-c3-mpu9250.elf
+file /home/diego/workspace/ESP32-C3-MPU9250/build/i2c-basic.elf

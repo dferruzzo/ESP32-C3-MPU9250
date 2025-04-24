@@ -1,0 +1,8 @@
+.clang-format
+.clangd
+.cproject
+.idea/
+.project
+.settings/
+.vscode/
+

@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "i2c-basic",
-    "project_version":    "4083951-dirty",
+    "project_version":    "6e4acce-dirty",
     "project_path":       "/home/diego/workspace/ESP32-C3-MPU9250",
     "idf_path":           "/media/diego/Diego/esp/esp-idf",
     "build_dir":          "/home/diego/workspace/ESP32-C3-MPU9250/build",

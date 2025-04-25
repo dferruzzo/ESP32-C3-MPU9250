@@ -5,16 +5,25 @@
 #include "freertos/task.h"
 #include "MPU9250_Configuration_Map.h"
 
-uint8_t gyro_full_scale_range[] = {
-    [0] = MPU9250_GYRO_FS_SEL_250,
-    [1] = MPU9250_GYRO_FS_SEL_500,
-    [2] = MPU9250_GYRO_FS_SEL_1000,
-    [3] = MPU9250_GYRO_FS_SEL_2000
+static const char *TAG = "MPU9250";
+
+uint16_t gyro_full_scale_range[] = {
+    [0] = MPU9250_GYRO_FS_SEL_250_VALUE,
+    [1] = MPU9250_GYRO_FS_SEL_500_VALUE,
+    [2] = MPU9250_GYRO_FS_SEL_1000_VALUE,
+    [3] = MPU9250_GYRO_FS_SEL_2000_VALUE
 };
 
 uint8_t gyro_fs_sel = 0x00; // Full-scale range selection
 
-static const char *TAG = "MPU9250";
+typedef struct {
+    int16_t x;
+    int16_t y;
+    int16_t z;
+} int16_vector3_t;
+
+int16_vector3_t *gyro_data_raw_ptr = NULL;
+int16_vector3_t *gyro_data_scaled_ptr = NULL;
 
 esp_err_t mpu9250_read_register(i2c_master_dev_handle_t dev_handle, uint8_t reg_addr, uint8_t *data, size_t len) {
     return i2c_master_transmit_receive(dev_handle, &reg_addr, 1, data, len, I2C_MASTER_TIMEOUT_MS / portTICK_PERIOD_MS);
@@ -134,11 +143,11 @@ esp_err_t mpu9250_read_gyroscope(i2c_master_dev_handle_t dev_handle, int16_t *gy
         *gyro_x = (int16_t)((raw_data[0] << 8) | raw_data[1]);
         *gyro_y = (int16_t)((raw_data[2] << 8) | raw_data[3]);
         *gyro_z = (int16_t)((raw_data[4] << 8) | raw_data[5]);
-        ESP_LOGI(TAG, "Gyroscope data - X: %.2f, Y: %.2f, Z: %.2f", 
-             *gyro_x/(2*gyro_full_scale_range[gyro_fs_sel]),
-             *gyro_y/(2*gyro_full_scale_range[gyro_fs_sel]),
-             *gyro_z/(2*gyro_full_scale_range[gyro_fs_sel]));
-        return ESP_OK;
+
+        float scale = gyro_full_scale_range[gyro_fs_sel] / 32768.0f;
+		ESP_LOGI(TAG, "Gyroscope data (degrees/sec): X = %.2f, Y = %.2f, Z = %.2f",
+				 *gyro_x * scale, *gyro_y * scale, *gyro_z * scale);
+		return ESP_OK;
     } else {
         ESP_LOGE(TAG, "Failed to read gyroscope data");
         return ESP_FAIL;

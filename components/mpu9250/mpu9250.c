@@ -3,6 +3,16 @@
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "MPU9250_Configuration_Map.h"
+
+uint8_t gyro_full_scale_range[] = {
+    [0] = MPU9250_GYRO_FS_SEL_250,
+    [1] = MPU9250_GYRO_FS_SEL_500,
+    [2] = MPU9250_GYRO_FS_SEL_1000,
+    [3] = MPU9250_GYRO_FS_SEL_2000
+};
+
+uint8_t gyro_fs_sel = 0x00; // Full-scale range selection
 
 static const char *TAG = "MPU9250";
 
@@ -52,12 +62,85 @@ void mpu9250_reset(i2c_master_dev_handle_t dev_handle) {
  *       the MPU9250 sensor is connected before calling this function.
  * @note The `gyro_config` parameter must be set according to the MPU9250 datasheet.
  */
-esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle, uint8_t gyro_config) {
+esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle, uint8_t fs_sel) {
+    if (fs_sel > 3) {
+		gyro_fs_sel = fs_sel;
+		ESP_LOGE(TAG, "Invalid FS_SEL value: %d. Must be between 0 and 3.",
+				fs_sel);
+		return ESP_FAIL;
+    }
+
+    mpu9250_gyroscope_reset(dev_handle); // Reset gyroscope settings
+
+    uint8_t gyro_config = (fs_sel << 3); // Set the gyroscope full-scale range based on FS_SEL
+
     if (mpu9250_write_register(dev_handle, MPU9250_GYRO_CONFIG, gyro_config) == ESP_OK) {
-        ESP_LOGI(TAG, "Gyroscope configured with value: 0x%02X", gyro_config);
+        ESP_LOGI(TAG, "Gyroscope configured with FS_SEL = %d (value: 0x%02X)", fs_sel, gyro_config);
         return ESP_OK;
     } else {
         ESP_LOGE(TAG, "Failed to configure gyroscope");
+        return ESP_FAIL;
+    }
+}
+
+/**
+ * @brief Resets the gyroscope configuration of the MPU9250 sensor.
+ *
+ * This function resets the gyroscope configuration by writing the default value
+ * to the MPU9250_GYRO_CONFIG register using the provided I2C master device handle.
+ *
+ * @param[in] dev_handle The I2C master device handle used to communicate with the MPU9250 sensor.
+ *
+ * @return
+ *      - ESP_OK: If the gyroscope configuration was successfully reset.
+ *      - ESP_FAIL: If the gyroscope configuration reset operation failed.
+ *
+ * @note Ensure that the I2C master device handle is properly initialized and 
+ *       the MPU9250 sensor is connected before calling this function.
+ */
+esp_err_t mpu9250_gyroscope_reset(i2c_master_dev_handle_t dev_handle) {
+    uint8_t default_gyro_config = 0x00; // Default value for gyroscope configuration register
+    if (mpu9250_write_register(dev_handle, MPU9250_GYRO_CONFIG, default_gyro_config) == ESP_OK) {
+        ESP_LOGI(TAG, "Gyroscope configuration reset to default value: 0x%02X", default_gyro_config);
+        return ESP_OK;
+    } else {
+        ESP_LOGE(TAG, "Failed to reset gyroscope configuration");
+        return ESP_FAIL;
+    }
+}
+
+/**
+ * @brief Reads gyroscope data from the MPU9250 sensor.
+ *
+ * This function reads the raw gyroscope data (X, Y, Z axes) from the MPU9250 sensor
+ * using the provided I2C master device handle. The data is stored in the provided
+ * output parameters.
+ *
+ * @param[in] dev_handle The I2C master device handle used to communicate with the MPU9250 sensor.
+ * @param[out] gyro_x Pointer to store the raw gyroscope X-axis data.
+ * @param[out] gyro_y Pointer to store the raw gyroscope Y-axis data.
+ * @param[out] gyro_z Pointer to store the raw gyroscope Z-axis data.
+ *
+ * @return
+ *      - ESP_OK: If the gyroscope data was successfully read.
+ *      - ESP_FAIL: If the gyroscope data read operation failed.
+ *
+ * @note Ensure that the I2C master device handle is properly initialized and 
+ *       the MPU9250 sensor is connected before calling this function.
+ */
+esp_err_t mpu9250_read_gyroscope(i2c_master_dev_handle_t dev_handle, int16_t *gyro_x, int16_t *gyro_y, int16_t *gyro_z) {
+    uint8_t raw_data[6];
+    if (mpu9250_read_register(dev_handle, MPU9250_GYRO_XOUT_H, raw_data, sizeof(raw_data)) == ESP_OK) {
+        *gyro_x = (int16_t)((raw_data[0] << 8) | raw_data[1]);
+        *gyro_y = (int16_t)((raw_data[2] << 8) | raw_data[3]);
+        *gyro_z = (int16_t)((raw_data[4] << 8) | raw_data[5]);
+        ESP_LOGI(TAG, "Gyroscope data - X: %.2f, Y: %.2f, Z: %.2f", 
+             *gyro_x/(2*gyro_full_scale_range[gyro_fs_sel]),
+             *gyro_y/(2*gyro_full_scale_range[gyro_fs_sel]),
+             *gyro_z/(2*gyro_full_scale_range[gyro_fs_sel]));
+        return ESP_OK;
+    } else {
+        ESP_LOGE(TAG, "Failed to read gyroscope data");
         return ESP_FAIL;
     }
 }

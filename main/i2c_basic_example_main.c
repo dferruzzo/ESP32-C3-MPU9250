@@ -23,18 +23,24 @@ void app_main() {
     i2c_master_bus_handle_t bus_handle;
     i2c_master_dev_handle_t dev_handle;
 
+    // Variáveis para armazenar os dados do giroscópio
+    int16_t gyro_x, gyro_y, gyro_z;
+
     // Initialize I2C using my_i2c component
-    ESP_ERROR_CHECK(my_i2c_init(&bus_handle, &dev_handle, I2C_MASTER_SDA_IO, 
-        I2C_MASTER_SCL_IO, I2C_MASTER_FREQ_HZ, MPU9250_SENSOR_ADDR));
+    ESP_ERROR_CHECK(my_i2c_init(&bus_handle, &dev_handle, I2C_MASTER_SDA_IO, I2C_MASTER_SCL_IO, I2C_MASTER_FREQ_HZ, MPU9250_SENSOR_ADDR));
     
     // Use the MPU9250 component
     mpu9250_log_who_am_i(dev_handle);
 
-  // Configure gyroscope settings
-    uint8_t gyro_config = 0x18; // Example configuration value
-	mpu9250_configure_gyroscope(dev_handle, gyro_config);
+    // Configure gyroscope settings
+	mpu9250_configure_gyroscope(dev_handle, MPU9250_GYRO_FS_SEL_250);
+
+    while(1){
+        // Read gyroscope data
+        mpu9250_read_gyroscope(dev_handle, &gyro_x, &gyro_y, &gyro_z);
+        vTaskDelay(pdMS_TO_TICKS(500)); // Delay for 1 second
+    }
 
 	// Deinitialize I2C using my_i2c component
     ESP_ERROR_CHECK(my_i2c_deinit(bus_handle, dev_handle));
-
 }

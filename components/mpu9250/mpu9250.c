@@ -15,6 +15,7 @@ uint16_t gyro_full_scale_range[] = {
 };
 
 uint8_t gyro_fs_sel = 0x00; // Full-scale range selection
+uint8_t *gyro_fs_sel_ptr = &gyro_fs_sel; // Full-scale range selection pointer
 
 esp_err_t mpu9250_read_register(i2c_master_dev_handle_t dev_handle, uint8_t reg_addr, uint8_t *data, size_t len) {
     return i2c_master_transmit_receive(dev_handle, &reg_addr, 1, data, len, I2C_MASTER_TIMEOUT_MS / portTICK_PERIOD_MS);
@@ -40,46 +41,6 @@ void mpu9250_reset(i2c_master_dev_handle_t dev_handle) {
         ESP_LOGI(TAG, "MPU9250 reset command sent");
     } else {
         ESP_LOGE(TAG, "Failed to send reset command to MPU9250");
-    }
-}
-
-/**
- * @brief Configures the gyroscope settings of the MPU9250 sensor.
- *
- * This function writes the specified gyroscope configuration value to the 
- * MPU9250_GYRO_CONFIG register of the MPU9250 sensor using the provided 
- * I2C master device handle.
- *
- * @param[in] dev_handle The I2C master device handle used to communicate with the MPU9250 sensor.
- * @param[in] gyro_config The gyroscope configuration value to be written to the MPU9250_GYRO_CONFIG register.
- *                        This value determines the gyroscope's full-scale range and other settings.
- *
- * @return
- *      - ESP_OK: If the gyroscope configuration was successfully written.
- *      - ESP_FAIL: If the gyroscope configuration write operation failed.
- *
- * @note Ensure that the I2C master device handle is properly initialized and 
- *       the MPU9250 sensor is connected before calling this function.
- * @note The `gyro_config` parameter must be set according to the MPU9250 datasheet.
- */
-esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle, uint8_t fs_sel) {
-    if (fs_sel > 3) {
-		gyro_fs_sel = fs_sel;
-		ESP_LOGE(TAG, "Invalid FS_SEL value: %d. Must be between 0 and 3.",
-				fs_sel);
-		return ESP_FAIL;
-    }
-
-    mpu9250_gyroscope_reset(dev_handle); // Reset gyroscope settings
-
-    uint8_t gyro_config = (fs_sel << 3); // Set the gyroscope full-scale range based on FS_SEL
-
-    if (mpu9250_write_register(dev_handle, MPU9250_GYRO_CONFIG, gyro_config) == ESP_OK) {
-        ESP_LOGI(TAG, "Gyroscope configured with FS_SEL = %d (value: 0x%02X)", fs_sel, gyro_config);
-        return ESP_OK;
-    } else {
-        ESP_LOGE(TAG, "Failed to configure gyroscope");
-        return ESP_FAIL;
     }
 }
 
@@ -110,6 +71,45 @@ esp_err_t mpu9250_gyroscope_reset(i2c_master_dev_handle_t dev_handle) {
 }
 
 /**
+ * @brief Configures the gyroscope settings of the MPU9250 sensor.
+ *
+ * This function writes the specified gyroscope configuration value to the 
+ * MPU9250_GYRO_CONFIG register of the MPU9250 sensor using the provided 
+ * I2C master device handle.
+ *
+ * @param[in] dev_handle The I2C master device handle used to communicate with the MPU9250 sensor.
+ * @param[in] gyro_config The gyroscope configuration value to be written to the MPU9250_GYRO_CONFIG register.
+ *                        This value determines the gyroscope's full-scale range and other settings.
+ *
+ * @return
+ *      - ESP_OK: If the gyroscope configuration was successfully written.
+ *      - ESP_FAIL: If the gyroscope configuration write operation failed.
+ *
+ * @note Ensure that the I2C master device handle is properly initialized and 
+ *       the MPU9250 sensor is connected before calling this function.
+ * @note The `gyro_config` parameter must be set according to the MPU9250 datasheet.
+ */
+esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle, uint8_t fs_sel) {
+    if (fs_sel > 3) {
+		ESP_LOGE(TAG, "Invalid FS_SEL value: %d. Must be between 0 and 3.",
+				fs_sel);
+		return ESP_FAIL;
+    }
+
+    mpu9250_gyroscope_reset(dev_handle); // Reset gyroscope settings
+
+    *gyro_fs_sel_ptr = fs_sel; // Set the gyroscope full-scale range based on FS_SEL
+
+    if (mpu9250_write_register(dev_handle, MPU9250_GYRO_CONFIG, (gyro_fs_sel << 3)) == ESP_OK) {
+        ESP_LOGI(TAG, "Gyroscope configured with FS_SEL = %d (value: 0x%02X)", fs_sel, (gyro_fs_sel << 3));
+                return ESP_OK;
+    } else {
+        ESP_LOGE(TAG, "Failed to configure gyroscope");
+        return ESP_FAIL;
+    }
+}
+
+/**
  * @brief Reads gyroscope data from the MPU9250 sensor.
  *
  * This function reads the raw gyroscope data (X, Y, Z axes) from the MPU9250 sensor
@@ -135,7 +135,9 @@ esp_err_t mpu9250_read_gyroscope(i2c_master_dev_handle_t dev_handle, int16_t *gy
         *gyro_y = (int16_t)((raw_data[2] << 8) | raw_data[3]);
         *gyro_z = (int16_t)((raw_data[4] << 8) | raw_data[5]);
 
-        float scale = gyro_full_scale_range[gyro_fs_sel] / 32768.0f;
+        ESP_LOGI(TAG, "gyro_fs_sel: %d", gyro_fs_sel);
+		float scale = gyro_full_scale_range[gyro_fs_sel] / 32768.0f;
+        ESP_LOGI(TAG, "scale: %.2f", scale);
 		ESP_LOGI(TAG, "Gyroscope data (degrees/sec): X = %.2f, Y = %.2f, Z = %.2f",
 				 *gyro_x * scale, *gyro_y * scale, *gyro_z * scale);
 		return ESP_OK;

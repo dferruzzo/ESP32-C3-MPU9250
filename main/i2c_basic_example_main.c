@@ -33,7 +33,7 @@ void app_main() {
     mpu9250_log_who_am_i(dev_handle);
 
     // Configure gyroscope settings
-	mpu9250_configure_gyroscope(dev_handle, MPU9250_GYRO_FS_SEL_250);
+	mpu9250_configure_gyroscope(dev_handle, MPU9250_GYRO_FS_SEL_1000);
 
     while(1){
         // Read gyroscope data

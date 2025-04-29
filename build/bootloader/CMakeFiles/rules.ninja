@@ -306,7 +306,7 @@ rule CLEAN_ADDITIONAL
 # Rule for cleaning all built files.
 
 rule CLEAN
-  command = /usr/bin/ninja $FILE_ARG -t clean $TARGETS
+  command = /home/diego/.espressif/tools/ninja/1.12.1/ninja $FILE_ARG -t clean $TARGETS
   description = Cleaning all built files...
 
 
@@ -314,6 +314,6 @@ rule CLEAN
 # Rule for printing all primary targets available.
 
 rule HELP
-  command = /usr/bin/ninja -t targets
+  command = /home/diego/.espressif/tools/ninja/1.12.1/ninja -t targets
   description = All primary targets available:
 

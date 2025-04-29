@@ -175,7 +175,7 @@ CMAKE_INSTALL_SYSCONFDIR:PATH=etc
 CMAKE_LINKER:FILEPATH=/home/diego/.espressif/tools/riscv32-esp-elf/esp-14.2.0_20241119/riscv32-esp-elf/bin/riscv32-esp-elf-ld
 
 //Program used to build from build.ninja files.
-CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/ninja
+CMAKE_MAKE_PROGRAM:FILEPATH=/home/diego/.espressif/tools/ninja/1.12.1/ninja
 
 //Flags used by the linker during the creation of modules during
 // all build types.
@@ -354,9 +354,6 @@ PYTHON:UNINITIALIZED=/home/diego/.espressif/python_env/idf5.5_py3.11_env/bin/pyt
 
 //No help, variable specified on the command line.
 PYTHON_DEPS_CHECKED:UNINITIALIZED=1
-
-//No help, variable specified on the command line.
-SDKCONFIG:UNINITIALIZED=/home/diego/workspace/ESP32-C3-MPU9250/sdkconfig
 
 //Allow unsafe builds. These builds ARE NOT SECURE.
 UNSAFE_BUILD:BOOL=OFF

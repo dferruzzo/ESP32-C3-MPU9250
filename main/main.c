@@ -22,7 +22,7 @@
 
 void app_main() {
 
-    /* reservando memoria para os dados */
+    /* Reservando memoria para os dados */
 
     float *gyr_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
     float *acc_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block

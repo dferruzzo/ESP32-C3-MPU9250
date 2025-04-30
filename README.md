@@ -20,7 +20,7 @@ This project integrates the ESP32-C3 microcontroller with the MPU9250 sensor to 
 
 1. Clone this repository:
     ```bash
-    git clone https://github.com/yourusername/ESP32-C3-MPU9250.git
+    git clone https://github.com/dferruzzo/ESP32-C3-MPU9250.git
     cd ESP32-C3-MPU9250
     ```
 

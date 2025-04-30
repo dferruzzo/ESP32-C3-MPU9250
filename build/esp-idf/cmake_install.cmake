@@ -562,3 +562,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/mpu9250/cmake_install.cmake")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/utils/cmake_install.cmake")
+endif()
+

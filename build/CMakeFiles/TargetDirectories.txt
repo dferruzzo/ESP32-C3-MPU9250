@@ -841,3 +841,10 @@
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/mpu9250/CMakeFiles/install.dir
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/mpu9250/CMakeFiles/install/local.dir
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/mpu9250/CMakeFiles/install/strip.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/utils/CMakeFiles/__idf_utils.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/utils/CMakeFiles/edit_cache.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/utils/CMakeFiles/rebuild_cache.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/utils/CMakeFiles/list_install_components.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/utils/CMakeFiles/install.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/utils/CMakeFiles/install/local.dir
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/utils/CMakeFiles/install/strip.dir

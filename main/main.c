@@ -18,47 +18,63 @@
 #include "driver/i2c_master.h"
 #include "mpu9250.h"
 #include "my_i2c.h"
-
-void show_vector(int16_t *data) {
-    for (int i = 0; i < 3; i++) {
-        ESP_LOGI("test_func", "Data[%d]: %.2f", i, data[i]);  // Fixed pointer arithmetic
-    }
-}
+#include "utils.h"
 
 void app_main() {
 
-    int16_t *gyro_data = (int16_t *)malloc(3 * sizeof(int16_t));  // Allocate as single contiguous block
-    if (gyro_data == NULL) {
+    /* reservando memoria para os dados */
+
+    float *gyr_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
+    float *acc_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
+    float *mag_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
+
+    /* Verifica se a memoria foi alocada com sucesso */
+
+    if ((gyr_data == NULL)||(acc_data == NULL)|| (mag_data == NULL)) {
         ESP_LOGE("app_main", "Failed to allocate memory for data");
         return;
     } else {
         ESP_LOGI("app_main", "Memory allocated successfully");
     }
 
+    /* Iniciando o i2c */
+
 	i2c_master_bus_handle_t bus_handle;
     i2c_master_dev_handle_t dev_handle;
 
-    // Initialize I2C using my_i2c component
+    // Initialize I2C com o endereço do MPU9250
     ESP_ERROR_CHECK(my_i2c_init(&bus_handle, &dev_handle, I2C_MASTER_SDA_IO, I2C_MASTER_SCL_IO, I2C_MASTER_FREQ_HZ, MPU9250_SENSOR_ADDR));
     
-    // Use the MPU9250 component
+    /* Testa o MPU9250 */
     mpu9250_log_who_am_i(dev_handle);
 
     // Configure gyroscope settings
 	mpu9250_configure_gyroscope(dev_handle, MPU9250_GYRO_FS_SEL_1000);
 
+    /* Loop */
+
     while(1){
         // Read gyroscope data
-        //mpu9250_read_gyroscope(dev_handle, &gyro_x, &gyro_y, &gyro_z);
-        mpu9250_read_gyroscope(dev_handle, gyro_data);
-        show_vector(gyro_data);
-
         
-        vTaskDelay(pdMS_TO_TICKS(500)); // Delay for 1 second
+        mpu9250_read_gyroscope(dev_handle, gyr_data);
+		ESP_LOGI("main ", "Gyroscope data (degrees/sec):");
+		show_vector(gyr_data);
+
+        mpu9250_read_accelerometer(dev_handle, acc_data);
+        ESP_LOGI("main ", "Accelerometer data (g):");
+        show_vector(acc_data);
+
+		vTaskDelay(pdMS_TO_TICKS(500)); // Delay for 1 second
     }
 
 	// Deinitialize I2C using my_i2c component
     ESP_ERROR_CHECK(my_i2c_deinit(bus_handle, dev_handle));
 
-    //free(gyro_data);
+    /* Limpando a memoria */
+
+    free(gyr_data);
+    free(acc_data);
+    free(mag_data);
+
+    ESP_LOGI("app_main", "Memory freed successfully");
 }

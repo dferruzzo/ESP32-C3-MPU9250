@@ -14,6 +14,17 @@
 #define MPU9250_GYRO_FS_SEL_1000_VALUE    ((uint16_t)1000) // 1000 degrees/sec
 #define MPU9250_GYRO_FS_SEL_2000_VALUE    ((uint16_t)2000) // 2000 degrees/sec
 
+#define MPU9250_ACCEL_FS_SEL_2     0x00 // +/- 2g
+#define MPU9250_ACCEL_FS_SEL_4     0x01 // +/- 4g   
+#define MPU9250_ACCEL_FS_SEL_8     0x02 // +/- 8g
+#define MPU9250_ACCEL_FS_SEL_16    0x03 // +/- 16g
+
+#define MPU9250_ACCEL_FS_SEL_2_VALUE     ((uint16_t)2) // +/- 2g
+#define MPU9250_ACCEL_FS_SEL_4_VALUE     ((uint16_t)4) // +/- 4g
+#define MPU9250_ACCEL_FS_SEL_8_VALUE     ((uint16_t)8) // +/- 8g
+#define MPU9250_ACCEL_FS_SEL_16_VALUE    ((uint16_t)16) // +/- 16g
+#define MPU9250_ACCEL_CONFIG_FS_SEL_MASK 0x18 // Mask for FS_SEL bits in the accelerometer configuration register
+#define MPU9250_ACCEL_CONFIG_FS_SEL_POS  3 // Position of FS_SEL bits in the accelerometer configuration register
 
 #endif // MPU9250_CONFIGURATION_MAP_H
 //

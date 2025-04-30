@@ -2,7 +2,9 @@
 
 static const char *TAG = "MPU9250";
 
+/*********** */
 /* Gyroscope */
+/*********** */
 
 uint16_t gyro_full_scale_range[] = {
     [0] = MPU9250_GYRO_FS_SEL_250_VALUE,
@@ -87,6 +89,7 @@ esp_err_t mpu9250_gyroscope_reset(i2c_master_dev_handle_t dev_handle) {
  * @note The `gyro_config` parameter must be set according to the MPU9250 datasheet.
  */
 esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle, uint8_t fs_sel) {
+
     if (fs_sel > 3) {
 		ESP_LOGE(TAG, "Invalid FS_SEL value: %d. Must be between 0 and 3.",
 				fs_sel);
@@ -145,17 +148,32 @@ esp_err_t mpu9250_read_gyroscope(i2c_master_dev_handle_t dev_handle, float *gyro
     }
 }
 
+/*************** */
 /* Accelerometer */
+/*************** */
+
+uint16_t acc_full_scale_range[] = {
+    [0] = MPU9250_ACCEL_FS_SEL_2_VALUE,
+    [1] = MPU9250_ACCEL_FS_SEL_4_VALUE,
+    [2] = MPU9250_ACCEL_FS_SEL_8_VALUE,
+    [3] = MPU9250_ACCEL_FS_SEL_16_VALUE
+};
+
+uint8_t acc_fs_sel = 0x00; // Full-scale range selection
+uint8_t *acc_fs_sel_ptr = &acc_fs_sel; // Full-scale range selection pointer
 
 esp_err_t mpu9250_read_accelerometer(i2c_master_dev_handle_t dev_handle, float *accel_data){
     uint8_t raw_data[6];
     if (mpu9250_read_register(dev_handle, MPU9250_ACCEL_XOUT_H, raw_data, sizeof(raw_data)) == ESP_OK) {
-        float scale = 16384.0f; // Scale factor for accelerometer
-        ESP_LOGI(TAG, "Accelerometer scale: %.2f", scale);
+        //float scale = (float)(acc_full_scale_range[acc_fs_sel] / 32768.0f);
 
-        accel_data[0] = (float)(((int16_t)((raw_data[0] << 8) | raw_data[1])) / scale);
-        accel_data[1] = (float)(((int16_t)((raw_data[2] << 8) | raw_data[3])) / scale);
-        accel_data[2] = (float)(((int16_t)((raw_data[4] << 8) | raw_data[5])) / scale);
+        float scale = (float)((uint16_t)(acc_full_scale_range[acc_fs_sel]) / (float)(INT16_MAX));
+        //ESP_LOGI(TAG, "Accelerometer full scale range: %d", acc_full_scale_range[acc_fs_sel]);
+        //ESP_LOGI(TAG, "Accelerometer scale: %.6f", scale);
+
+        accel_data[0] = (float)(((int16_t)((raw_data[0] << 8) | raw_data[1])) * scale);
+        accel_data[1] = (float)(((int16_t)((raw_data[2] << 8) | raw_data[3])) * scale);
+        accel_data[2] = (float)(((int16_t)((raw_data[4] << 8) | raw_data[5])) * scale );
         
         //ESP_LOGI(TAG, "Accelerometer data (g): X = %.2f, Y = %.2f, Z = %.2f", accel_data[0], accel_data[1], accel_data[2]);
         
@@ -165,19 +183,19 @@ esp_err_t mpu9250_read_accelerometer(i2c_master_dev_handle_t dev_handle, float *
         return ESP_FAIL;
     }
 };
-esp_err_t mpu9250_configure_accelerometer(i2c_master_dev_handle_t dev_handle, uint8_t fs_sel){
-    if (fs_sel > 3) {
+esp_err_t mpu9250_configure_accelerometer(i2c_master_dev_handle_t dev_handle, uint8_t acc_fs_sel){
+    if (acc_fs_sel > 3) {
         ESP_LOGE(TAG, "Invalid FS_SEL value: %d. Must be between 0 and 3.",
-                fs_sel);
+                acc_fs_sel);
         return ESP_FAIL;
     }
 
-    mpu9250_gyroscope_reset(dev_handle); // Reset gyroscope settings
+    mpu9250_accelerometer_reset(dev_handle); // Reset gyroscope settings
 
-    *gyro_fs_sel_ptr = fs_sel; // Set the gyroscope full-scale range based on FS_SEL
+    *acc_fs_sel_ptr = acc_fs_sel; // Set the accelerometer full-scale range based on FS_SEL
 
-    if (mpu9250_write_register(dev_handle, MPU9250_ACCEL_CONFIG, (gyro_fs_sel << 3)) == ESP_OK) {
-        ESP_LOGI(TAG, "Accelerometer configured with FS_SEL = %d (value: 0x%02X)", fs_sel, (gyro_fs_sel << 3));
+    if (mpu9250_write_register(dev_handle, MPU9250_ACCEL_CONFIG, (acc_fs_sel << 3)) == ESP_OK) {
+        ESP_LOGI(TAG, "Accelerometer configured with FS_SEL = %d (value: 0x%02X)", acc_fs_sel, (acc_fs_sel << 3));
                 return ESP_OK;
     } else {
         ESP_LOGE(TAG, "Failed to configure accelerometer");

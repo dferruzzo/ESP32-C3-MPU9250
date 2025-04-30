@@ -51,7 +51,10 @@ void app_main() {
     // Configure gyroscope settings
 	mpu9250_configure_gyroscope(dev_handle, MPU9250_GYRO_FS_SEL_1000);
 
-    /* Loop */
+    // Configure accelerometer settings
+	mpu9250_configure_accelerometer(dev_handle, MPU9250_ACCEL_FS_SEL_4);
+
+	/* Loop */
 
     while(1){
         // Read gyroscope data

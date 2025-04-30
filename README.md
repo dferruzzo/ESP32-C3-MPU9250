@@ -50,11 +50,11 @@ This project is licensed under the [MIT License](LICENSE).
 ## TODO
 
 - [x] Ler e configurar o giroscópio.
-- [ ] Configurar o acelerômetro,
+- [x] Configurar o acelerômetro,
+- [ ] Ler e configurar a temperatura,
+- [ ] Conectar o magnetômetro via I2C,
 - [ ] Ler o magnetômetro,
 - [ ] Configurar o magnetômetro,
-- [ ] Ler a temperatura,
-- [ ] Configurar a temperatura.
 - [ ] Implementar o filtro de Kalman.
 
 

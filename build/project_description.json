@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "i2c-basic",
-    "project_version":    "9ec6daf-dirty",
+    "project_version":    "37c246b-dirty",
     "project_path":       "/home/diego/workspace/ESP32-C3-MPU9250",
     "idf_path":           "/media/diego/Diego/esp/esp-idf",
     "build_dir":          "/home/diego/workspace/ESP32-C3-MPU9250/build",
@@ -1210,7 +1210,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/main/libmain.a",
-            "sources": [ "/home/diego/workspace/ESP32-C3-MPU9250/main/i2c_basic_example_main.c" ],
+            "sources": [ "/home/diego/workspace/ESP32-C3-MPU9250/main/main.c" ],
             "include_dirs": [ "." ]
         },
         "mbedtls": {

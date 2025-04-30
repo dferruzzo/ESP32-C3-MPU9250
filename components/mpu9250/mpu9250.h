@@ -23,9 +23,9 @@ void mpu9250_log_who_am_i(i2c_master_dev_handle_t dev_handle);
 esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle,
 									uint8_t fs_sel);
 esp_err_t mpu9250_gyroscope_reset(i2c_master_dev_handle_t dev_handle);
+//esp_err_t mpu9250_read_gyroscope(i2c_master_dev_handle_t dev_handle, int16_t *gyro_x, int16_t *gyro_y, int16_t *gyro_z);
 esp_err_t mpu9250_read_gyroscope(i2c_master_dev_handle_t dev_handle,
-								 int16_t *gyro_x, int16_t *gyro_y,
-								 int16_t *gyro_z);
+								 int16_t *gyro_data);
 
 #ifdef __cplusplus
 }

@@ -128,6 +128,7 @@ esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle, uint8_
  * @note Ensure that the I2C master device handle is properly initialized and 
  *       the MPU9250 sensor is connected before calling this function.
  */
+/*
 esp_err_t mpu9250_read_gyroscope(i2c_master_dev_handle_t dev_handle, int16_t *gyro_x, int16_t *gyro_y, int16_t *gyro_z) {
     uint8_t raw_data[6];
     if (mpu9250_read_register(dev_handle, MPU9250_GYRO_XOUT_H, raw_data, sizeof(raw_data)) == ESP_OK) {
@@ -146,3 +147,27 @@ esp_err_t mpu9250_read_gyroscope(i2c_master_dev_handle_t dev_handle, int16_t *gy
         return ESP_FAIL;
     }
 }
+*/
+esp_err_t mpu9250_read_gyroscope(i2c_master_dev_handle_t dev_handle, int16_t *gyro_data) {
+    uint8_t raw_data[6];
+    if (mpu9250_read_register(dev_handle, MPU9250_GYRO_XOUT_H, raw_data, sizeof(raw_data)) == ESP_OK) {
+
+        gyro_data[0] = (int16_t)((raw_data[0] << 8) | raw_data[1]);
+        gyro_data[1] = (int16_t)((raw_data[2] << 8) | raw_data[3]);
+        gyro_data[2] = (int16_t)((raw_data[4] << 8) | raw_data[5]);
+
+        ESP_LOGI(TAG, "gyro_fs_sel: %d", gyro_fs_sel);
+		float scale = gyro_full_scale_range[gyro_fs_sel] / 32768.0f;
+        ESP_LOGI(TAG, "scale: %.2f", scale);
+		ESP_LOGI(TAG, "Gyroscope data (degrees/sec): X = %.2f, Y = %.2f, Z = %.2f", gyro_data[0] * scale, gyro_data[1] * scale, gyro_data[2] * scale);
+        gyro_data[0] *= scale;
+        gyro_data[1] *= scale;
+        gyro_data[2] *= scale;
+		return ESP_OK;
+    } else {
+        ESP_LOGE(TAG, "Failed to read gyroscope data");
+        return ESP_FAIL;
+    }
+}
+
+

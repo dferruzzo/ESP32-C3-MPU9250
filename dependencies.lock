@@ -1,0 +1,46 @@
+dependencies:
+  espressif/esp-idf-cxx:
+    component_hash: 2fa63e4e725f0c2d3dd6d99da8a91d404b4b49667088b1be0f336eb9c13ff17f
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.0.2-beta
+  idf:
+    source:
+      type: idf
+    version: 5.5.0
+  plasmapper/pl_common:
+    component_hash: bc77bf671462e34ba957e32182ed8f77c8eca31edf125cfc57a19d7b74de1db0
+    dependencies:
+    - name: idf
+      require: private
+      version: ^5.0
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 1.2.2
+  plasmapper/pl_i2c:
+    component_hash: 1928b4f7554d4cfc8c3bec0ad847a9a141b4d336102afb16481b5ed594ab4476
+    dependencies:
+    - name: idf
+      require: private
+      version: ^5.3
+    - name: plasmapper/pl_common
+      registry_url: https://components.espressif.com
+      require: private
+      version: ^1.2.2
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.2.0
+direct_dependencies:
+- espressif/esp-idf-cxx
+- idf
+- plasmapper/pl_i2c
+manifest_hash: ddc58f451960bb585c9fe186eed8f055a5afe14fa7ca6013503f7640c4f8163e
+target: esp32c3
+version: 2.0.0

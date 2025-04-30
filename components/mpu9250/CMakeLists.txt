@@ -1,3 +1,3 @@
-idf_component_register(SRCS "mpu9250.cpp"
+idf_component_register(SRCS ""
                        INCLUDE_DIRS "."
-                       REQUIRES driver my_i2c)
+                       REQUIRES driver)

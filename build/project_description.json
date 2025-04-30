@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "i2c-basic",
-    "project_version":    "37c246b-dirty",
+    "project_version":    "d54356f-dirty",
     "project_path":       "/home/diego/workspace/ESP32-C3-MPU9250",
     "idf_path":           "/media/diego/Diego/esp/esp-idf",
     "build_dir":          "/home/diego/workspace/ESP32-C3-MPU9250/build",
@@ -25,8 +25,8 @@
         "COMPONENT_KCONFIGS_PROJBUILD" : "/media/diego/Diego/esp/esp-idf/components/bootloader/Kconfig.projbuild;/media/diego/Diego/esp/esp-idf/components/esp_app_format/Kconfig.projbuild;/media/diego/Diego/esp/esp-idf/components/esp_rom/Kconfig.projbuild;/media/diego/Diego/esp/esp-idf/components/esptool_py/Kconfig.projbuild;/media/diego/Diego/esp/esp-idf/components/partition_table/Kconfig.projbuild;/home/diego/workspace/ESP32-C3-MPU9250/main/Kconfig.projbuild"
     },
     "common_component_reqs": [ "cxx", "newlib", "freertos", "esp_hw_support", "heap", "log", "soc", "hal", "esp_rom", "esp_common", "esp_system", "riscv" ],
-    "build_components" : [ "app_trace", "app_update", "bootloader", "bootloader_support", "bt", "cmock", "console", "cxx", "driver", "efuse", "esp-tls", "esp_adc", "esp_app_format", "esp_bootloader_format", "esp_coex", "esp_common", "esp_driver_ana_cmpr", "esp_driver_bitscrambler", "esp_driver_cam", "esp_driver_dac", "esp_driver_gpio", "esp_driver_gptimer", "esp_driver_i2c", "esp_driver_i2s", "esp_driver_isp", "esp_driver_jpeg", "esp_driver_ledc", "esp_driver_mcpwm", "esp_driver_parlio", "esp_driver_pcnt", "esp_driver_ppa", "esp_driver_rmt", "esp_driver_sdio", "esp_driver_sdm", "esp_driver_sdmmc", "esp_driver_sdspi", "esp_driver_spi", "esp_driver_touch_sens", "esp_driver_tsens", "esp_driver_uart", "esp_driver_usb_serial_jtag", "esp_eth", "esp_event", "esp_gdbstub", "esp_hid", "esp_http_client", "esp_http_server", "esp_https_ota", "esp_https_server", "esp_hw_support", "esp_lcd", "esp_local_ctrl", "esp_mm", "esp_netif", "esp_netif_stack", "esp_partition", "esp_phy", "esp_pm", "esp_psram", "esp_ringbuf", "esp_rom", "esp_security", "esp_system", "esp_timer", "esp_vfs_console", "esp_wifi", "espcoredump", "esptool_py", "fatfs", "freertos", "hal", "heap", "http_parser", "idf_test", "ieee802154", "json", "log", "lwip", "main", "mbedtls", "mpu9250", "mqtt", "my_i2c", "newlib", "nvs_flash", "nvs_sec_provider", "openthread", "partition_table", "protobuf-c", "protocomm", "pthread", "riscv", "rt", "sdmmc", "soc", "spi_flash", "spiffs", "tcp_transport", "ulp", "unity", "usb", "vfs", "wear_levelling", "wifi_provisioning", "wpa_supplicant", "" ],
-    "build_component_paths" : [ "/media/diego/Diego/esp/esp-idf/components/app_trace", "/media/diego/Diego/esp/esp-idf/components/app_update", "/media/diego/Diego/esp/esp-idf/components/bootloader", "/media/diego/Diego/esp/esp-idf/components/bootloader_support", "/media/diego/Diego/esp/esp-idf/components/bt", "/media/diego/Diego/esp/esp-idf/components/cmock", "/media/diego/Diego/esp/esp-idf/components/console", "/media/diego/Diego/esp/esp-idf/components/cxx", "/media/diego/Diego/esp/esp-idf/components/driver", "/media/diego/Diego/esp/esp-idf/components/efuse", "/media/diego/Diego/esp/esp-idf/components/esp-tls", "/media/diego/Diego/esp/esp-idf/components/esp_adc", "/media/diego/Diego/esp/esp-idf/components/esp_app_format", "/media/diego/Diego/esp/esp-idf/components/esp_bootloader_format", "/media/diego/Diego/esp/esp-idf/components/esp_coex", "/media/diego/Diego/esp/esp-idf/components/esp_common", "/media/diego/Diego/esp/esp-idf/components/esp_driver_ana_cmpr", "/media/diego/Diego/esp/esp-idf/components/esp_driver_bitscrambler", "/media/diego/Diego/esp/esp-idf/components/esp_driver_cam", "/media/diego/Diego/esp/esp-idf/components/esp_driver_dac", "/media/diego/Diego/esp/esp-idf/components/esp_driver_gpio", "/media/diego/Diego/esp/esp-idf/components/esp_driver_gptimer", "/media/diego/Diego/esp/esp-idf/components/esp_driver_i2c", "/media/diego/Diego/esp/esp-idf/components/esp_driver_i2s", "/media/diego/Diego/esp/esp-idf/components/esp_driver_isp", "/media/diego/Diego/esp/esp-idf/components/esp_driver_jpeg", "/media/diego/Diego/esp/esp-idf/components/esp_driver_ledc", "/media/diego/Diego/esp/esp-idf/components/esp_driver_mcpwm", "/media/diego/Diego/esp/esp-idf/components/esp_driver_parlio", "/media/diego/Diego/esp/esp-idf/components/esp_driver_pcnt", "/media/diego/Diego/esp/esp-idf/components/esp_driver_ppa", "/media/diego/Diego/esp/esp-idf/components/esp_driver_rmt", "/media/diego/Diego/esp/esp-idf/components/esp_driver_sdio", "/media/diego/Diego/esp/esp-idf/components/esp_driver_sdm", "/media/diego/Diego/esp/esp-idf/components/esp_driver_sdmmc", "/media/diego/Diego/esp/esp-idf/components/esp_driver_sdspi", "/media/diego/Diego/esp/esp-idf/components/esp_driver_spi", "/media/diego/Diego/esp/esp-idf/components/esp_driver_touch_sens", "/media/diego/Diego/esp/esp-idf/components/esp_driver_tsens", "/media/diego/Diego/esp/esp-idf/components/esp_driver_uart", "/media/diego/Diego/esp/esp-idf/components/esp_driver_usb_serial_jtag", "/media/diego/Diego/esp/esp-idf/components/esp_eth", "/media/diego/Diego/esp/esp-idf/components/esp_event", "/media/diego/Diego/esp/esp-idf/components/esp_gdbstub", "/media/diego/Diego/esp/esp-idf/components/esp_hid", "/media/diego/Diego/esp/esp-idf/components/esp_http_client", "/media/diego/Diego/esp/esp-idf/components/esp_http_server", "/media/diego/Diego/esp/esp-idf/components/esp_https_ota", "/media/diego/Diego/esp/esp-idf/components/esp_https_server", "/media/diego/Diego/esp/esp-idf/components/esp_hw_support", "/media/diego/Diego/esp/esp-idf/components/esp_lcd", "/media/diego/Diego/esp/esp-idf/components/esp_local_ctrl", "/media/diego/Diego/esp/esp-idf/components/esp_mm", "/media/diego/Diego/esp/esp-idf/components/esp_netif", "/media/diego/Diego/esp/esp-idf/components/esp_netif_stack", "/media/diego/Diego/esp/esp-idf/components/esp_partition", "/media/diego/Diego/esp/esp-idf/components/esp_phy", "/media/diego/Diego/esp/esp-idf/components/esp_pm", "/media/diego/Diego/esp/esp-idf/components/esp_psram", "/media/diego/Diego/esp/esp-idf/components/esp_ringbuf", "/media/diego/Diego/esp/esp-idf/components/esp_rom", "/media/diego/Diego/esp/esp-idf/components/esp_security", "/media/diego/Diego/esp/esp-idf/components/esp_system", "/media/diego/Diego/esp/esp-idf/components/esp_timer", "/media/diego/Diego/esp/esp-idf/components/esp_vfs_console", "/media/diego/Diego/esp/esp-idf/components/esp_wifi", "/media/diego/Diego/esp/esp-idf/components/espcoredump", "/media/diego/Diego/esp/esp-idf/components/esptool_py", "/media/diego/Diego/esp/esp-idf/components/fatfs", "/media/diego/Diego/esp/esp-idf/components/freertos", "/media/diego/Diego/esp/esp-idf/components/hal", "/media/diego/Diego/esp/esp-idf/components/heap", "/media/diego/Diego/esp/esp-idf/components/http_parser", "/media/diego/Diego/esp/esp-idf/components/idf_test", "/media/diego/Diego/esp/esp-idf/components/ieee802154", "/media/diego/Diego/esp/esp-idf/components/json", "/media/diego/Diego/esp/esp-idf/components/log", "/media/diego/Diego/esp/esp-idf/components/lwip", "/home/diego/workspace/ESP32-C3-MPU9250/main", "/media/diego/Diego/esp/esp-idf/components/mbedtls", "/home/diego/workspace/ESP32-C3-MPU9250/components/mpu9250", "/media/diego/Diego/esp/esp-idf/components/mqtt", "/home/diego/workspace/ESP32-C3-MPU9250/components/my_i2c", "/media/diego/Diego/esp/esp-idf/components/newlib", "/media/diego/Diego/esp/esp-idf/components/nvs_flash", "/media/diego/Diego/esp/esp-idf/components/nvs_sec_provider", "/media/diego/Diego/esp/esp-idf/components/openthread", "/media/diego/Diego/esp/esp-idf/components/partition_table", "/media/diego/Diego/esp/esp-idf/components/protobuf-c", "/media/diego/Diego/esp/esp-idf/components/protocomm", "/media/diego/Diego/esp/esp-idf/components/pthread", "/media/diego/Diego/esp/esp-idf/components/riscv", "/media/diego/Diego/esp/esp-idf/components/rt", "/media/diego/Diego/esp/esp-idf/components/sdmmc", "/media/diego/Diego/esp/esp-idf/components/soc", "/media/diego/Diego/esp/esp-idf/components/spi_flash", "/media/diego/Diego/esp/esp-idf/components/spiffs", "/media/diego/Diego/esp/esp-idf/components/tcp_transport", "/media/diego/Diego/esp/esp-idf/components/ulp", "/media/diego/Diego/esp/esp-idf/components/unity", "/media/diego/Diego/esp/esp-idf/components/usb", "/media/diego/Diego/esp/esp-idf/components/vfs", "/media/diego/Diego/esp/esp-idf/components/wear_levelling", "/media/diego/Diego/esp/esp-idf/components/wifi_provisioning", "/media/diego/Diego/esp/esp-idf/components/wpa_supplicant", "" ],
+    "build_components" : [ "app_trace", "app_update", "bootloader", "bootloader_support", "bt", "cmock", "console", "cxx", "driver", "efuse", "esp-tls", "esp_adc", "esp_app_format", "esp_bootloader_format", "esp_coex", "esp_common", "esp_driver_ana_cmpr", "esp_driver_bitscrambler", "esp_driver_cam", "esp_driver_dac", "esp_driver_gpio", "esp_driver_gptimer", "esp_driver_i2c", "esp_driver_i2s", "esp_driver_isp", "esp_driver_jpeg", "esp_driver_ledc", "esp_driver_mcpwm", "esp_driver_parlio", "esp_driver_pcnt", "esp_driver_ppa", "esp_driver_rmt", "esp_driver_sdio", "esp_driver_sdm", "esp_driver_sdmmc", "esp_driver_sdspi", "esp_driver_spi", "esp_driver_touch_sens", "esp_driver_tsens", "esp_driver_uart", "esp_driver_usb_serial_jtag", "esp_eth", "esp_event", "esp_gdbstub", "esp_hid", "esp_http_client", "esp_http_server", "esp_https_ota", "esp_https_server", "esp_hw_support", "esp_lcd", "esp_local_ctrl", "esp_mm", "esp_netif", "esp_netif_stack", "esp_partition", "esp_phy", "esp_pm", "esp_psram", "esp_ringbuf", "esp_rom", "esp_security", "esp_system", "esp_timer", "esp_vfs_console", "esp_wifi", "espcoredump", "espressif__esp-idf-cxx", "esptool_py", "fatfs", "freertos", "hal", "heap", "http_parser", "idf_test", "ieee802154", "json", "log", "lwip", "main", "mbedtls", "mpu9250", "mqtt", "my_i2c", "newlib", "nvs_flash", "nvs_sec_provider", "openthread", "partition_table", "plasmapper__pl_common", "plasmapper__pl_i2c", "protobuf-c", "protocomm", "pthread", "riscv", "rt", "sdmmc", "soc", "spi_flash", "spiffs", "tcp_transport", "ulp", "unity", "usb", "vfs", "wear_levelling", "wifi_provisioning", "wpa_supplicant", "" ],
+    "build_component_paths" : [ "/media/diego/Diego/esp/esp-idf/components/app_trace", "/media/diego/Diego/esp/esp-idf/components/app_update", "/media/diego/Diego/esp/esp-idf/components/bootloader", "/media/diego/Diego/esp/esp-idf/components/bootloader_support", "/media/diego/Diego/esp/esp-idf/components/bt", "/media/diego/Diego/esp/esp-idf/components/cmock", "/media/diego/Diego/esp/esp-idf/components/console", "/media/diego/Diego/esp/esp-idf/components/cxx", "/media/diego/Diego/esp/esp-idf/components/driver", "/media/diego/Diego/esp/esp-idf/components/efuse", "/media/diego/Diego/esp/esp-idf/components/esp-tls", "/media/diego/Diego/esp/esp-idf/components/esp_adc", "/media/diego/Diego/esp/esp-idf/components/esp_app_format", "/media/diego/Diego/esp/esp-idf/components/esp_bootloader_format", "/media/diego/Diego/esp/esp-idf/components/esp_coex", "/media/diego/Diego/esp/esp-idf/components/esp_common", "/media/diego/Diego/esp/esp-idf/components/esp_driver_ana_cmpr", "/media/diego/Diego/esp/esp-idf/components/esp_driver_bitscrambler", "/media/diego/Diego/esp/esp-idf/components/esp_driver_cam", "/media/diego/Diego/esp/esp-idf/components/esp_driver_dac", "/media/diego/Diego/esp/esp-idf/components/esp_driver_gpio", "/media/diego/Diego/esp/esp-idf/components/esp_driver_gptimer", "/media/diego/Diego/esp/esp-idf/components/esp_driver_i2c", "/media/diego/Diego/esp/esp-idf/components/esp_driver_i2s", "/media/diego/Diego/esp/esp-idf/components/esp_driver_isp", "/media/diego/Diego/esp/esp-idf/components/esp_driver_jpeg", "/media/diego/Diego/esp/esp-idf/components/esp_driver_ledc", "/media/diego/Diego/esp/esp-idf/components/esp_driver_mcpwm", "/media/diego/Diego/esp/esp-idf/components/esp_driver_parlio", "/media/diego/Diego/esp/esp-idf/components/esp_driver_pcnt", "/media/diego/Diego/esp/esp-idf/components/esp_driver_ppa", "/media/diego/Diego/esp/esp-idf/components/esp_driver_rmt", "/media/diego/Diego/esp/esp-idf/components/esp_driver_sdio", "/media/diego/Diego/esp/esp-idf/components/esp_driver_sdm", "/media/diego/Diego/esp/esp-idf/components/esp_driver_sdmmc", "/media/diego/Diego/esp/esp-idf/components/esp_driver_sdspi", "/media/diego/Diego/esp/esp-idf/components/esp_driver_spi", "/media/diego/Diego/esp/esp-idf/components/esp_driver_touch_sens", "/media/diego/Diego/esp/esp-idf/components/esp_driver_tsens", "/media/diego/Diego/esp/esp-idf/components/esp_driver_uart", "/media/diego/Diego/esp/esp-idf/components/esp_driver_usb_serial_jtag", "/media/diego/Diego/esp/esp-idf/components/esp_eth", "/media/diego/Diego/esp/esp-idf/components/esp_event", "/media/diego/Diego/esp/esp-idf/components/esp_gdbstub", "/media/diego/Diego/esp/esp-idf/components/esp_hid", "/media/diego/Diego/esp/esp-idf/components/esp_http_client", "/media/diego/Diego/esp/esp-idf/components/esp_http_server", "/media/diego/Diego/esp/esp-idf/components/esp_https_ota", "/media/diego/Diego/esp/esp-idf/components/esp_https_server", "/media/diego/Diego/esp/esp-idf/components/esp_hw_support", "/media/diego/Diego/esp/esp-idf/components/esp_lcd", "/media/diego/Diego/esp/esp-idf/components/esp_local_ctrl", "/media/diego/Diego/esp/esp-idf/components/esp_mm", "/media/diego/Diego/esp/esp-idf/components/esp_netif", "/media/diego/Diego/esp/esp-idf/components/esp_netif_stack", "/media/diego/Diego/esp/esp-idf/components/esp_partition", "/media/diego/Diego/esp/esp-idf/components/esp_phy", "/media/diego/Diego/esp/esp-idf/components/esp_pm", "/media/diego/Diego/esp/esp-idf/components/esp_psram", "/media/diego/Diego/esp/esp-idf/components/esp_ringbuf", "/media/diego/Diego/esp/esp-idf/components/esp_rom", "/media/diego/Diego/esp/esp-idf/components/esp_security", "/media/diego/Diego/esp/esp-idf/components/esp_system", "/media/diego/Diego/esp/esp-idf/components/esp_timer", "/media/diego/Diego/esp/esp-idf/components/esp_vfs_console", "/media/diego/Diego/esp/esp-idf/components/esp_wifi", "/media/diego/Diego/esp/esp-idf/components/espcoredump", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/espressif__esp-idf-cxx", "/media/diego/Diego/esp/esp-idf/components/esptool_py", "/media/diego/Diego/esp/esp-idf/components/fatfs", "/media/diego/Diego/esp/esp-idf/components/freertos", "/media/diego/Diego/esp/esp-idf/components/hal", "/media/diego/Diego/esp/esp-idf/components/heap", "/media/diego/Diego/esp/esp-idf/components/http_parser", "/media/diego/Diego/esp/esp-idf/components/idf_test", "/media/diego/Diego/esp/esp-idf/components/ieee802154", "/media/diego/Diego/esp/esp-idf/components/json", "/media/diego/Diego/esp/esp-idf/components/log", "/media/diego/Diego/esp/esp-idf/components/lwip", "/home/diego/workspace/ESP32-C3-MPU9250/main", "/media/diego/Diego/esp/esp-idf/components/mbedtls", "/home/diego/workspace/ESP32-C3-MPU9250/components/mpu9250", "/media/diego/Diego/esp/esp-idf/components/mqtt", "/home/diego/workspace/ESP32-C3-MPU9250/components/my_i2c", "/media/diego/Diego/esp/esp-idf/components/newlib", "/media/diego/Diego/esp/esp-idf/components/nvs_flash", "/media/diego/Diego/esp/esp-idf/components/nvs_sec_provider", "/media/diego/Diego/esp/esp-idf/components/openthread", "/media/diego/Diego/esp/esp-idf/components/partition_table", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_common", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_i2c", "/media/diego/Diego/esp/esp-idf/components/protobuf-c", "/media/diego/Diego/esp/esp-idf/components/protocomm", "/media/diego/Diego/esp/esp-idf/components/pthread", "/media/diego/Diego/esp/esp-idf/components/riscv", "/media/diego/Diego/esp/esp-idf/components/rt", "/media/diego/Diego/esp/esp-idf/components/sdmmc", "/media/diego/Diego/esp/esp-idf/components/soc", "/media/diego/Diego/esp/esp-idf/components/spi_flash", "/media/diego/Diego/esp/esp-idf/components/spiffs", "/media/diego/Diego/esp/esp-idf/components/tcp_transport", "/media/diego/Diego/esp/esp-idf/components/ulp", "/media/diego/Diego/esp/esp-idf/components/unity", "/media/diego/Diego/esp/esp-idf/components/usb", "/media/diego/Diego/esp/esp-idf/components/vfs", "/media/diego/Diego/esp/esp-idf/components/wear_levelling", "/media/diego/Diego/esp/esp-idf/components/wifi_provisioning", "/media/diego/Diego/esp/esp-idf/components/wpa_supplicant", "" ],
     "build_component_info" : {
         "app_trace": {
             "alias": "idf::app_trace",
@@ -1033,6 +1033,21 @@
             "sources": [ "/media/diego/Diego/esp/esp-idf/components/espcoredump/src/core_dump_init.c", "/media/diego/Diego/esp/esp-idf/components/espcoredump/src/core_dump_common.c", "/media/diego/Diego/esp/esp-idf/components/espcoredump/src/core_dump_flash.c", "/media/diego/Diego/esp/esp-idf/components/espcoredump/src/core_dump_uart.c", "/media/diego/Diego/esp/esp-idf/components/espcoredump/src/core_dump_elf.c", "/media/diego/Diego/esp/esp-idf/components/espcoredump/src/core_dump_binary.c", "/media/diego/Diego/esp/esp-idf/components/espcoredump/src/core_dump_sha.c", "/media/diego/Diego/esp/esp-idf/components/espcoredump/src/core_dump_crc.c", "/media/diego/Diego/esp/esp-idf/components/espcoredump/src/port/riscv/core_dump_port.c" ],
             "include_dirs": [ "include", "include/port/riscv" ]
         },
+        "espressif__esp-idf-cxx": {
+            "alias": "idf::espressif__esp-idf-cxx",
+            "target": "___idf_espressif__esp-idf-cxx",
+            "prefix": "idf",
+            "dir": "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/espressif__esp-idf-cxx",
+            "type": "LIBRARY",
+            "lib": "__idf_espressif__esp-idf-cxx",
+            "reqs": [ "esp_timer", "esp_event", "pthread" ],
+            "priv_reqs": [ "freertos", "driver" ],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "file": "/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/espressif__esp-idf-cxx/libespressif__esp-idf-cxx.a",
+            "sources": [ "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/espressif__esp-idf-cxx/esp_timer_cxx.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/espressif__esp-idf-cxx/esp_exception.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/espressif__esp-idf-cxx/gpio_cxx.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/espressif__esp-idf-cxx/i2c_cxx.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/espressif__esp-idf-cxx/spi_cxx.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/espressif__esp-idf-cxx/spi_host_cxx.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/espressif__esp-idf-cxx/esp_event_api.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/espressif__esp-idf-cxx/esp_event_cxx.cpp" ],
+            "include_dirs": [ "include" ]
+        },
         "esptool_py": {
             "alias": "idf::esptool_py",
             "target": "___idf_esptool_py",
@@ -1206,9 +1221,9 @@
             "type": "LIBRARY",
             "lib": "__idf_main",
             "reqs": [],
-            "priv_reqs": [],
+            "priv_reqs": [ "espressif__esp-idf-cxx", "plasmapper__pl_i2c" ],
             "managed_reqs": [],
-            "managed_priv_reqs": [],
+            "managed_priv_reqs": [ "espressif__esp-idf-cxx", "plasmapper__pl_i2c" ],
             "file": "/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/main/libmain.a",
             "sources": [ "/home/diego/workspace/ESP32-C3-MPU9250/main/main.cpp" ],
             "include_dirs": [ "." ]
@@ -1233,14 +1248,14 @@
             "target": "___idf_mpu9250",
             "prefix": "idf",
             "dir": "/home/diego/workspace/ESP32-C3-MPU9250/components/mpu9250",
-            "type": "LIBRARY",
+            "type": "CONFIG_ONLY",
             "lib": "__idf_mpu9250",
-            "reqs": [ "driver", "my_i2c" ],
+            "reqs": [ "driver" ],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/mpu9250/libmpu9250.a",
-            "sources": [ "/home/diego/workspace/ESP32-C3-MPU9250/components/mpu9250/mpu9250.cpp" ],
+            "file": "",
+            "sources": [],
             "include_dirs": [ "." ]
         },
         "mqtt": {
@@ -1347,6 +1362,36 @@
             "file": "",
             "sources": [],
             "include_dirs": []
+        },
+        "plasmapper__pl_common": {
+            "alias": "idf::plasmapper__pl_common",
+            "target": "___idf_plasmapper__pl_common",
+            "prefix": "idf",
+            "dir": "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_common",
+            "type": "LIBRARY",
+            "lib": "__idf_plasmapper__pl_common",
+            "reqs": [],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "file": "/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/plasmapper__pl_common/libplasmapper__pl_common.a",
+            "sources": [ "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_common/pl_mutex.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_common/pl_lock_guard.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_common/pl_buffer.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_common/pl_stream.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_common/pl_hardware_interface.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_common/pl_server.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_common/pl_stream_server.cpp" ],
+            "include_dirs": [ "include" ]
+        },
+        "plasmapper__pl_i2c": {
+            "alias": "idf::plasmapper__pl_i2c",
+            "target": "___idf_plasmapper__pl_i2c",
+            "prefix": "idf",
+            "dir": "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_i2c",
+            "type": "LIBRARY",
+            "lib": "__idf_plasmapper__pl_i2c",
+            "reqs": [ "esp_driver_i2c", "plasmapper__pl_common" ],
+            "priv_reqs": [ "plasmapper__pl_common" ],
+            "managed_reqs": [],
+            "managed_priv_reqs": [ "plasmapper__pl_common" ],
+            "file": "/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/plasmapper__pl_i2c/libplasmapper__pl_i2c.a",
+            "sources": [ "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_i2c/pl_i2c_base.cpp", "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_i2c/pl_i2c_controller.cpp" ],
+            "include_dirs": [ "include" ]
         },
         "protobuf-c": {
             "alias": "idf::protobuf-c",
@@ -2896,9 +2941,9 @@
             "dir": "/home/diego/workspace/ESP32-C3-MPU9250/main",
             "lib": "__idf_main",
             "reqs": [],
-            "priv_reqs": [],
+            "priv_reqs": [ "espressif__esp-idf-cxx", "plasmapper__pl_i2c" ],
             "managed_reqs": [],
-            "managed_priv_reqs": [],
+            "managed_priv_reqs": [ "espressif__esp-idf-cxx", "plasmapper__pl_i2c" ],
             "include_dirs": [ "." ]
         },
         "mpu9250": {
@@ -2907,7 +2952,7 @@
             "prefix": "idf",
             "dir": "/home/diego/workspace/ESP32-C3-MPU9250/components/mpu9250",
             "lib": "__idf_mpu9250",
-            "reqs": [ "driver", "my_i2c" ],
+            "reqs": [ "driver" ],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
@@ -2924,6 +2969,42 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "include_dirs": [ "." ]
+        },
+        "espressif__esp-idf-cxx": {
+            "alias": "idf::espressif__esp-idf-cxx",
+            "target": "___idf_espressif__esp-idf-cxx",
+            "prefix": "idf",
+            "dir": "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/espressif__esp-idf-cxx",
+            "lib": "__idf_espressif__esp-idf-cxx",
+            "reqs": [ "esp_timer", "esp_event", "pthread" ],
+            "priv_reqs": [ "freertos", "driver" ],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
+        },
+        "plasmapper__pl_common": {
+            "alias": "idf::plasmapper__pl_common",
+            "target": "___idf_plasmapper__pl_common",
+            "prefix": "idf",
+            "dir": "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_common",
+            "lib": "__idf_plasmapper__pl_common",
+            "reqs": [],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
+        },
+        "plasmapper__pl_i2c": {
+            "alias": "idf::plasmapper__pl_i2c",
+            "target": "___idf_plasmapper__pl_i2c",
+            "prefix": "idf",
+            "dir": "/home/diego/workspace/ESP32-C3-MPU9250/managed_components/plasmapper__pl_i2c",
+            "lib": "__idf_plasmapper__pl_i2c",
+            "reqs": [ "esp_driver_i2c", "plasmapper__pl_common" ],
+            "priv_reqs": [ "plasmapper__pl_common" ],
+            "managed_reqs": [],
+            "managed_priv_reqs": [ "plasmapper__pl_common" ],
+            "include_dirs": [ "include" ]
         }
     },
     "debug_prefix_map_gdbinit": "",

@@ -1,0 +1,11 @@
+dependencies:
+  idf: ^5.3
+  plasmapper/pl_common: ^1.2.2
+description: I2C C++ class component for ESP-IDF
+license: MIT
+repository: git://github.com/plasmapper/i2c-esp-cpp.git
+repository_info:
+  commit_sha: 881a85f112bdec3d2bcdd6b3e54ff4c112d84828
+  path: pl_i2c
+url: https://github.com/plasmapper/i2c-esp-cpp
+version: 1.2.0

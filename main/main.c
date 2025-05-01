@@ -26,11 +26,12 @@ void app_main() {
 
     float *gyr_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
     float *acc_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
-    float *mag_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
+    float *temp_data = (float *)malloc(1 * sizeof(float));  // Allocate as single contiguous block
+    //float *mag_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
 
     /* Verifica se a memoria foi alocada com sucesso */
 
-    if ((gyr_data == NULL)||(acc_data == NULL)|| (mag_data == NULL)) {
+    if ((gyr_data == NULL)||(acc_data == NULL)|| (temp_data == NULL)) {
         ESP_LOGE("app_main", "Failed to allocate memory for data");
         return;
     } else {
@@ -44,8 +45,11 @@ void app_main() {
 
     // Initialize I2C com o endereço do MPU9250
     ESP_ERROR_CHECK(my_i2c_init(&bus_handle, &dev_handle, I2C_MASTER_SDA_IO, I2C_MASTER_SCL_IO, I2C_MASTER_FREQ_HZ, MPU9250_SENSOR_ADDR));
-    
-    /* Testa o MPU9250 */
+
+    // Scan I2C bus for devices
+	ESP_ERROR_CHECK(my_i2c_scan(bus_handle));
+
+	/* Testa o MPU9250 */
     mpu9250_log_who_am_i(dev_handle);
 
     // Configure gyroscope settings
@@ -63,9 +67,25 @@ void app_main() {
 		ESP_LOGI("main ", "Gyroscope data (degrees/sec):");
 		show_vector(gyr_data);
 
+        // Read accelerometer data
+
         mpu9250_read_accelerometer(dev_handle, acc_data);
         ESP_LOGI("main ", "Accelerometer data (g):");
         show_vector(acc_data);
+
+        // Read temperature data
+
+        mpu9250_read_temperature(dev_handle, temp_data);
+        ESP_LOGI("main ", "Temperature data (°C):");
+        show_data(temp_data, 1);
+
+        // Read magnetometer data (testing)
+        #define MPU9250_TEST_ADDR 0x39 // Address to test
+        uint8_t data_test = 0xFF; // Buffer to store magnetometer data
+        my_i2c_read(dev_handle, MPU9250_TEST_ADDR, &data_test, 1);
+        ESP_LOGI("main", "Test data (raw): 0x%02X", mag_data_test);
+
+        // Delay for 0.5 second        
 
 		vTaskDelay(pdMS_TO_TICKS(500)); // Delay for 1 second
     }
@@ -77,7 +97,8 @@ void app_main() {
 
     free(gyr_data);
     free(acc_data);
-    free(mag_data);
+    free(temp_data);
+    //free(mag_data);
 
     ESP_LOGI("app_main", "Memory freed successfully");
 }

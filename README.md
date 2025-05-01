@@ -49,9 +49,12 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## TODO
 
-- [x] Ler e configurar o giroscópio.
-- [x] Configurar o acelerômetro,
-- [ ] Ler e configurar a temperatura,
+- [x] Ler, configurar a escala do giroscópio.
+- [x] Configurar a escala dop acelerômetro,
+- [x] Ler e configurar a escala da temperatura,
+- [x] Implementar um I2C scanner para detectar os dispositivos conectados.
+- [ ] implementar os filtros do MPU9250.
+- [ ] Calibrar o giroscópio e o acelerômetro.
 - [ ] Conectar o magnetômetro via I2C,
 - [ ] Ler o magnetômetro,
 - [ ] Configurar o magnetômetro,

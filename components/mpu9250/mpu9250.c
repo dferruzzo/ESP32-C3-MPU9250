@@ -213,3 +213,42 @@ esp_err_t mpu9250_accelerometer_reset(i2c_master_dev_handle_t dev_handle){
     }
 };
 
+/***************/
+/* Temperature */
+/***************/
+
+esp_err_t mpu9250_read_temperature(i2c_master_dev_handle_t dev_handle, float *temp_data){
+    uint8_t raw_data[2];
+    if (mpu9250_read_register(dev_handle, MPU9250_TEMP_OUT_H, raw_data, sizeof(raw_data)) == ESP_OK) {
+        int16_t temp_raw = (int16_t)((raw_data[0] << 8) | raw_data[1]);
+        *temp_data = (float)(temp_raw / 333.87f + 21.00f);
+        //*temp_data = (float)(temp_raw);
+        //ESP_LOGI(TAG, "Temperature data: %.2f °C", *temp_data);
+
+        return ESP_OK;
+    } else {
+        ESP_LOGE(TAG, "Failed to read temperature data");
+        return ESP_FAIL;
+    }
+};
+
+/****************/
+/* Magnetometer */
+/****************/
+/*
+esp_err_t mpu9250_read_magnetometer(i2c_master_dev_handle_t dev_handle, float *mag_data){
+    uint8_t raw_data[6];
+    if (mpu9250_read_register(dev_handle, MPU9250_MAG_XOUT_L, raw_data, sizeof(raw_data)) == ESP_OK) {
+        mag_data[0] = (float)(((int16_t)((raw_data[0] << 8) | raw_data[1])) * 0.15f);
+        mag_data[1] = (float)(((int16_t)((raw_data[2] << 8) | raw_data[3])) * 0.15f);
+        mag_data[2] = (float)(((int16_t)((raw_data[4] << 8) | raw_data[5])) * 0.15f);
+        
+        ESP_LOGI(TAG, "Magnetometer data: X = %.2f, Y = %.2f, Z = %.2f", mag_data[0], mag_data[1], mag_data[2]);
+        
+        return ESP_OK;
+    } else {
+        ESP_LOGE(TAG, "Failed to read magnetometer data");
+        return ESP_FAIL;
+    }   
+};
+*/  

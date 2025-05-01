@@ -5,5 +5,6 @@
 #include "esp_log.h"
 
 void show_vector(float *data);
+void show_data(float *data, int size);
 
 #endif // UTILS_H

@@ -38,6 +38,13 @@ esp_err_t mpu9250_read_accelerometer(i2c_master_dev_handle_t dev_handle, float *
 esp_err_t mpu9250_configure_accelerometer(i2c_master_dev_handle_t dev_handle, uint8_t fs_sel);
 esp_err_t mpu9250_accelerometer_reset(i2c_master_dev_handle_t dev_handle);
 
+/* Temperatura */
+
+esp_err_t mpu9250_read_temperature(i2c_master_dev_handle_t dev_handle, float *temp_data);
+
+/* Magnetometer */
+
+esp_err_t mpu9250_read_magnetometer(i2c_master_dev_handle_t dev_handle, float *mag_data);
 
 #ifdef __cplusplus
 }

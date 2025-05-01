@@ -3,6 +3,8 @@
 
 #include "driver/i2c_master.h"
 #include "esp_err.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 #define I2C_MASTER_SCL_IO           CONFIG_I2C_MASTER_SCL       /*!< GPIO number used for I2C master clock */
 #define I2C_MASTER_SDA_IO           CONFIG_I2C_MASTER_SDA       /*!< GPIO number used for I2C master data  */
@@ -18,6 +20,9 @@ extern "C" {
 
 esp_err_t my_i2c_init(i2c_master_bus_handle_t *bus_handle, i2c_master_dev_handle_t *dev_handle, int sda_io, int scl_io, int freq_hz, uint8_t dev_addr);
 esp_err_t my_i2c_deinit(i2c_master_bus_handle_t bus_handle, i2c_master_dev_handle_t dev_handle);
+esp_err_t my_i2c_scan(i2c_master_bus_handle_t bus_handle);
+esp_err_t my_i2c_read(i2c_master_dev_handle_t dev_handle, uint8_t reg_addr, uint8_t *data, size_t len);
+esp_err_t my_i2c_write(i2c_master_dev_handle_t dev_handle, uint8_t reg_addr, uint8_t data);
 
 #ifdef __cplusplus
 }

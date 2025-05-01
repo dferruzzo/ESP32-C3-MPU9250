@@ -163,3 +163,10 @@
 17	45	0	/home/diego/workspace/ESP32-C3-MPU9250/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	2b6211b389d992ab
 18	45	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	2b6211b389d992ab
 18	45	0	/home/diego/workspace/ESP32-C3-MPU9250/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	2b6211b389d992ab
+15	72	1746129987867867161	esp-idf/esp_bootloader_format/CMakeFiles/__idf_esp_bootloader_format.dir/esp_bootloader_desc.c.obj	4c009341bf18029
+72	89	1746129987887867439	esp-idf/esp_bootloader_format/libesp_bootloader_format.a	bfb33818d67914cd
+89	124	1746129987919867884	bootloader.elf	9300034c97f9373b
+124	225	1746129988019869275	.bin_timestamp	90ca0d01e1f7afa2
+124	225	1746129988019869275	/home/diego/workspace/ESP32-C3-MPU9250/build/bootloader/.bin_timestamp	90ca0d01e1f7afa2
+225	258	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	2b6211b389d992ab
+225	258	0	/home/diego/workspace/ESP32-C3-MPU9250/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	2b6211b389d992ab

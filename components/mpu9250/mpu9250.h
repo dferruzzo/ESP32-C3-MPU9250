@@ -12,6 +12,7 @@
 #include "freertos/task.h"
 
 #define MPU9250_SENSOR_ADDR         0x68        /*!< Address of the MPU9250 sensor */
+#define MPU9250_MAGNETOMETER_ADDR  0x0C        /*!< Address of the magnetometer (AK8963) */
 #define MPU9250_WHO_AM_I_REG_ADDR   0x75        /*!< Register addresses of the "who am I" register */
 #define MPU9250_PWR_MGMT_1_REG_ADDR 0x6B        /*!< Register addresses of the power management register */
 #define MPU9250_RESET_BIT           7
@@ -44,8 +45,12 @@ esp_err_t mpu9250_read_temperature(i2c_master_dev_handle_t dev_handle, float *te
 
 /* Magnetometer */
 
-esp_err_t mpu9250_read_magnetometer(i2c_master_dev_handle_t dev_handle, float *mag_data);
+esp_err_t
+mpu9250_read_magnetometer(i2c_master_dev_handle_t dev_handle_mpu9250,
+						  i2c_master_dev_handle_t dev_handle_magnetometer,
+						  float *mag_data);
 
+                          
 #ifdef __cplusplus
 }
 #endif

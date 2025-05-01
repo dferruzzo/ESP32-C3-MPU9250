@@ -4,7 +4,7 @@
 
 static const char *TAG = "MY_I2C";
 
-esp_err_t my_i2c_init(i2c_master_bus_handle_t *bus_handle, i2c_master_dev_handle_t *dev_handle, int sda_io, int scl_io, int freq_hz, uint8_t dev_addr) {
+esp_err_t my_i2c_init(i2c_master_bus_handle_t *bus_handle, int sda_io, int scl_io) {
     i2c_master_bus_config_t bus_config = {
         .i2c_port = I2C_NUM_0,
         .sda_io_num = sda_io,
@@ -15,6 +15,15 @@ esp_err_t my_i2c_init(i2c_master_bus_handle_t *bus_handle, i2c_master_dev_handle
     };
     ESP_ERROR_CHECK(i2c_new_master_bus(&bus_config, bus_handle));
 
+    ESP_LOGI(TAG, "I2C bus initialized successfully");
+
+	return ESP_OK;
+}
+
+esp_err_t my_i2c_add_dev(i2c_master_bus_handle_t *bus_handle, i2c_master_dev_handle_t *dev_handle, int freq_hz, uint8_t dev_addr) {
+
+    ESP_LOGI(TAG, "Adding I2C device with address 0x%02X", dev_addr);
+
     i2c_device_config_t dev_config = {
         .dev_addr_length = I2C_ADDR_BIT_LEN_7,
         .device_address = dev_addr,
@@ -22,12 +31,12 @@ esp_err_t my_i2c_init(i2c_master_bus_handle_t *bus_handle, i2c_master_dev_handle
     };
     ESP_ERROR_CHECK(i2c_master_bus_add_device(*bus_handle, &dev_config, dev_handle));
 
-    ESP_LOGI(TAG, "I2C initialized successfully");
+    ESP_LOGI(TAG, "Device added successfully");
     return ESP_OK;
 }
 
-esp_err_t my_i2c_deinit(i2c_master_bus_handle_t bus_handle, i2c_master_dev_handle_t dev_handle) {
-    ESP_ERROR_CHECK(i2c_master_bus_rm_device(dev_handle));
+esp_err_t my_i2c_deinit(i2c_master_bus_handle_t bus_handle) {
+    //ESP_ERROR_CHECK(i2c_master_bus_rm_device(dev_handle));
     ESP_ERROR_CHECK(i2c_del_master_bus(bus_handle));
     ESP_LOGI(TAG, "I2C de-initialized successfully");
     return ESP_OK;
@@ -68,11 +77,12 @@ esp_err_t my_i2c_scan(i2c_master_bus_handle_t bus_handle) {
 esp_err_t my_i2c_read(i2c_master_dev_handle_t dev_handle, uint8_t reg_addr, uint8_t *data, size_t len){
     esp_err_t ret;
     ret = i2c_master_transmit_receive(dev_handle, &reg_addr, 1, data, len, I2C_MASTER_TIMEOUT_MS / portTICK_PERIOD_MS);
-    if (ret == ESP_OK) {
-        ESP_LOGI(TAG, "Read %d bytes from register 0x%02X", len, reg_addr);
-    } else {
+    if (ret != ESP_OK) {
+        //ESP_LOGI(TAG, "Read %d bytes from register 0x%02X", len, reg_addr);
         ESP_LOGE(TAG, "Failed to read from register 0x%02X: %s", reg_addr, esp_err_to_name(ret));
-    }
+    } //else {
+        
+    //}
     return ret;
 }
 

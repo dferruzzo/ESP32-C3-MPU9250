@@ -77,4 +77,18 @@
 #define MPU9250_ZA_OFFSET_H         0x7D
 #define MPU9250_ZA_OFFSET_L         0x7E
 
+/* MAgnetometer */
+
+#define MPU9250_MAG_WIA_ADDR        0x00 // Address to test
+#define MPU9250_MAG_DATA_RDY        0x02 // Data ready bit
+#define MPU9250_MAG_HXL             0x03
+#define MPU9250_MAG_HXH             0x04
+#define MPU9250_MAG_HYL             0x05
+#define MPU9250_MAG_HYH             0x06
+#define MPU9250_MAG_HZL             0x07
+#define MPU9250_MAG_HZH             0x08
+#define MPU9250_MAG_CNTL            0x0A
+
+
+
 #endif // MPU9250_REGISTER_MAP_H

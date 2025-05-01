@@ -235,20 +235,34 @@ esp_err_t mpu9250_read_temperature(i2c_master_dev_handle_t dev_handle, float *te
 /****************/
 /* Magnetometer */
 /****************/
-/*
-esp_err_t mpu9250_read_magnetometer(i2c_master_dev_handle_t dev_handle, float *mag_data){
-    uint8_t raw_data[6];
-    if (mpu9250_read_register(dev_handle, MPU9250_MAG_XOUT_L, raw_data, sizeof(raw_data)) == ESP_OK) {
-        mag_data[0] = (float)(((int16_t)((raw_data[0] << 8) | raw_data[1])) * 0.15f);
-        mag_data[1] = (float)(((int16_t)((raw_data[2] << 8) | raw_data[3])) * 0.15f);
-        mag_data[2] = (float)(((int16_t)((raw_data[4] << 8) | raw_data[5])) * 0.15f);
-        
-        ESP_LOGI(TAG, "Magnetometer data: X = %.2f, Y = %.2f, Z = %.2f", mag_data[0], mag_data[1], mag_data[2]);
-        
-        return ESP_OK;
-    } else {
-        ESP_LOGE(TAG, "Failed to read magnetometer data");
+
+esp_err_t mpu9250_read_magnetometer(i2c_master_dev_handle_t dev_handle_mpu9250, i2c_master_dev_handle_t dev_handle_magnetometer, float *mag_data) {
+
+    my_i2c_write(dev_handle_mpu9250, MPU9250_INT_PIN_CFG, 0x02);    // Write to set PASS_THROUGH mode - Para ativar o Magnetómetro
+    my_i2c_write(dev_handle_magnetometer, MPU9250_MAG_CNTL, 0x01);  // Set magnetometer to single measurement mode
+
+    uint8_t data_ready = 0x00; // Buffer to store data ready status
+    do{
+        my_i2c_read(dev_handle_magnetometer, MPU9250_MAG_DATA_RDY, &data_ready, 1); // Read data ready status
+        } while((data_ready & 0x01) == 0); // Wait for data ready bit to be set
+    
+    // Read magnetometer data
+    uint8_t *mag_data_int = (uint8_t *)malloc(6 * sizeof(uint8_t));  // Allocate as single contiguous block
+    if (mag_data_int == NULL) {
+        ESP_LOGE("app_main", "Failed to allocate memory for magnetometer data");
         return ESP_FAIL;
-    }   
+    }
+    if(my_i2c_read(dev_handle_magnetometer, MPU9250_MAG_HXL, (uint8_t *)mag_data_int, 6) != ESP_OK){
+        ESP_LOGE(TAG, "Failed to read magnetometer data");
+        free(mag_data_int); // Free allocated memory
+        return ESP_FAIL;
+    }
+    mag_data[0] = (float)(((int16_t)((mag_data_int[1] << 8) | mag_data_int[0])) * 0.1465f);
+    mag_data[1] = (float)(((int16_t)((mag_data_int[3] << 8) | mag_data_int[2])) * 0.1465f);
+    mag_data[2] = (float)(((int16_t)((mag_data_int[5] << 8) | mag_data_int[4])) * 0.1465f);
+
+    my_i2c_write(dev_handle_mpu9250, MPU9250_INT_PIN_CFG, 0x00);    // Turn-off PASS_THROUGH mode - Para ativar o Magnetómetro
+    free(mag_data_int); // Free allocated memory
+
+    return ESP_OK;
 };
-*/  

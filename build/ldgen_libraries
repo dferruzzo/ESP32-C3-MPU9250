@@ -79,5 +79,6 @@
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/wifi_provisioning/libwifi_provisioning.a
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/main/libmain.a
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/my_i2c/libmy_i2c.a
-/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/mpu9250/libmpu9250.a
 /home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/utils/libutils.a
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/hmc5883l/libhmc5883l.a
+/home/diego/workspace/ESP32-C3-MPU9250/build/esp-idf/mpu9250/libmpu9250.a

@@ -27,7 +27,7 @@ void app_main() {
     float *gyr_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
     float *acc_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
     float *temp_data = (float *)malloc(1 * sizeof(float));  // Allocate as single contiguous block
-    //float *mag_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
+    float *mag_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
 
     /* Verifica se a memoria foi alocada com sucesso */
 
@@ -41,64 +41,62 @@ void app_main() {
     /* Iniciando o i2c */
 
 	i2c_master_bus_handle_t bus_handle;
-    i2c_master_dev_handle_t dev_handle;
+    i2c_master_dev_handle_t dev_handle_mpu9250;
+    i2c_master_dev_handle_t dev_handle_magnetometer;
 
-    // Initialize I2C com o endereço do MPU9250
-    ESP_ERROR_CHECK(my_i2c_init(&bus_handle, &dev_handle, I2C_MASTER_SDA_IO, I2C_MASTER_SCL_IO, I2C_MASTER_FREQ_HZ, MPU9250_SENSOR_ADDR));
+    // Initialize I2C bus
+	ESP_ERROR_CHECK(my_i2c_init(&bus_handle, I2C_MASTER_SDA_IO, I2C_MASTER_SCL_IO));
 
-    // Scan I2C bus for devices
+    // add MPU9250 device to I2C bus
+	ESP_ERROR_CHECK(my_i2c_add_dev(&bus_handle, &dev_handle_mpu9250, I2C_MASTER_FREQ_HZ, MPU9250_SENSOR_ADDR));
+
+    // add magnetometer device to I2C bus
+    ESP_ERROR_CHECK(my_i2c_add_dev(&bus_handle, &dev_handle_magnetometer, I2C_MASTER_FREQ_HZ, MPU9250_MAGNETOMETER_ADDR));
+
+	// Scan I2C bus for devices
 	ESP_ERROR_CHECK(my_i2c_scan(bus_handle));
 
 	/* Testa o MPU9250 */
-    mpu9250_log_who_am_i(dev_handle);
+    mpu9250_log_who_am_i(dev_handle_mpu9250);
 
     // Configure gyroscope settings
-	mpu9250_configure_gyroscope(dev_handle, MPU9250_GYRO_FS_SEL_1000);
+	mpu9250_configure_gyroscope(dev_handle_mpu9250, MPU9250_GYRO_FS_SEL_1000);
 
     // Configure accelerometer settings
-	mpu9250_configure_accelerometer(dev_handle, MPU9250_ACCEL_FS_SEL_4);
-
-	/* Loop */
+	mpu9250_configure_accelerometer(dev_handle_mpu9250, MPU9250_ACCEL_FS_SEL_4);
 
     while(1){
         // Read gyroscope data
         
-        mpu9250_read_gyroscope(dev_handle, gyr_data);
+        mpu9250_read_gyroscope(dev_handle_mpu9250, gyr_data);
 		ESP_LOGI("main ", "Gyroscope data (degrees/sec):");
 		show_vector(gyr_data);
 
-        // Read accelerometer data
+        //Read acelerometer data
 
-        mpu9250_read_accelerometer(dev_handle, acc_data);
+        mpu9250_read_accelerometer(dev_handle_mpu9250, acc_data);
         ESP_LOGI("main ", "Accelerometer data (g):");
         show_vector(acc_data);
 
-        // Read temperature data
+        // Read Magnetometer data
 
-        mpu9250_read_temperature(dev_handle, temp_data);
-        ESP_LOGI("main ", "Temperature data (°C):");
+		mpu9250_read_magnetometer(dev_handle_mpu9250, dev_handle_magnetometer, mag_data);
+		ESP_LOGI("main ", "Magnetometro data (uT):");
+		show_vector(mag_data);
+
+        //Read temperature data
+        
+        mpu9250_read_temperature(dev_handle_mpu9250, temp_data);
+        ESP_LOGI("main ", "Temperature data (C):");
         show_data(temp_data, 1);
-
-        // Read magnetometer data (testing)
-        #define MPU9250_TEST_ADDR 0x39 // Address to test
-        uint8_t data_test = 0xFF; // Buffer to store magnetometer data
-        my_i2c_read(dev_handle, MPU9250_TEST_ADDR, &data_test, 1);
-        ESP_LOGI("main", "Test data (raw): 0x%02X", mag_data_test);
 
         // Delay for 0.5 second        
 
-		vTaskDelay(pdMS_TO_TICKS(500)); // Delay for 1 second
+        vTaskDelay(pdMS_TO_TICKS(500)); // Delay for 1 second
     }
 
+
 	// Deinitialize I2C using my_i2c component
-    ESP_ERROR_CHECK(my_i2c_deinit(bus_handle, dev_handle));
+    //ESP_ERROR_CHECK(my_i2c_deinit(bus_handle));
 
-    /* Limpando a memoria */
-
-    free(gyr_data);
-    free(acc_data);
-    free(temp_data);
-    //free(mag_data);
-
-    ESP_LOGI("app_main", "Memory freed successfully");
 }

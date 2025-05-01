@@ -88,7 +88,7 @@ esp_err_t mpu9250_gyroscope_reset(i2c_master_dev_handle_t dev_handle) {
  *       the MPU9250 sensor is connected before calling this function.
  * @note The `gyro_config` parameter must be set according to the MPU9250 datasheet.
  */
-esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle, uint8_t fs_sel) {
+esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle, uint8_t fs_sel, uint8_t gyro_dlpf_cfg) {
 
     if (fs_sel > 3) {
 		ESP_LOGE(TAG, "Invalid FS_SEL value: %d. Must be between 0 and 3.",
@@ -96,15 +96,29 @@ esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle, uint8_
 		return ESP_FAIL;
     }
 
+    // Reset the gyroscope settings
+
     mpu9250_gyroscope_reset(dev_handle); // Reset gyroscope settings
 
     *gyro_fs_sel_ptr = fs_sel; // Set the gyroscope full-scale range based on FS_SEL
 
-    if (mpu9250_write_register(dev_handle, MPU9250_GYRO_CONFIG, (gyro_fs_sel << 3)) == ESP_OK) {
-        ESP_LOGI(TAG, "Gyroscope configured with FS_SEL = %d (value: 0x%02X)", fs_sel, (gyro_fs_sel << 3));
-                return ESP_OK;
+    // Set the gyroscope configuration, combine the full-scale range selection
+    // with the FCHOICE_B bits (0x00 for DLPF enabled)
+
+	int8_t gyro_conf =
+		(gyro_fs_sel << 3) | (MPU9250_FCHOICE_B_1 << 1) | (MPU9250_FCHOICE_B_0);
+
+	esp_err_t ret1, ret2;
+
+	ret1 = mpu9250_write_register(dev_handle, MPU9250_GYRO_CONFIG, gyro_conf);  // configura escala do giroscópio
+    ret2 = mpu9250_write_register(dev_handle, MPU9250_CONFIG, gyro_dlpf_cfg);   // configura DLPF
+
+    if (ret1 == ESP_OK && ret2 == ESP_OK) {
+        ESP_LOGI(TAG, "Gyroscope configured with config = 0x%02X", gyro_conf);
+        ESP_LOGI(TAG, "DLPF configured with config = 0x%02X", gyro_dlpf_cfg);
+        return ESP_OK;
     } else {
-        ESP_LOGE(TAG, "Failed to configure gyroscope");
+        ESP_LOGE(TAG, "Failed to configure gyroscope or DLPF");
         return ESP_FAIL;
     }
 }

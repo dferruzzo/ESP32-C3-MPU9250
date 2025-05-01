@@ -50,15 +50,20 @@ This project is licensed under the [MIT License](LICENSE).
 ## TODO
 
 - [x] Ler, configurar a escala do giroscópio.
-- [x] Configurar a escala dop acelerômetro,
-- [x] Ler e configurar a escala da temperatura,
+- [x] Configurar a escala dop acelerômetro.
+- [x] Ler e configurar a escala da temperatura.
 - [x] Implementar um I2C scanner para detectar os dispositivos conectados.
-- [ ] implementar os filtros do MPU9250.
-- [ ] Calibrar o giroscópio e o acelerômetro.
-- [ ] Conectar o magnetômetro via I2C,
-- [ ] Ler o magnetômetro,
-- [ ] Configurar o magnetômetro,
+- [x] Ler o magnetômetro do MPU9250.
+- [x] Configurar o magnetômetro do MPU9250.
+- [x] Implementar os filtros (DLPF) do Giroscópio do MPU9250.
+- [ ] Implementar os filtros (DLPF) do Acelerômetro do MPU9250.
+- [ ] Calibrar o giroscópio.
+- [ ] Calibrar o acelerômetro.
+- [ ] Calibrar o magnetómetro.
+- [ ] Conectar o magnetômetro HMC5883L via I2C.
 - [ ] Implementar o filtro de Kalman.
+- [ ] Determinar a atitude em ângulos de Euler.
+- [ ] Determinar a atitude em quaternions.
 
 
 

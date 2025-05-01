@@ -60,7 +60,7 @@ void app_main() {
     mpu9250_log_who_am_i(dev_handle_mpu9250);
 
     // Configure gyroscope settings
-	mpu9250_configure_gyroscope(dev_handle_mpu9250, MPU9250_GYRO_FS_SEL_1000);
+	mpu9250_configure_gyroscope(dev_handle_mpu9250, MPU9250_GYRO_FS_SEL_1000, MPU9250_GYRO_DLPF_CFG_92HZ);
 
     // Configure accelerometer settings
 	mpu9250_configure_accelerometer(dev_handle_mpu9250, MPU9250_ACCEL_FS_SEL_4);

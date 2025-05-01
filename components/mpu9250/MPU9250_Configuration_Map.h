@@ -9,6 +9,21 @@
 #define MPU9250_GYRO_FS_SEL_1000    0x02 // 1000 degrees/sec
 #define MPU9250_GYRO_FS_SEL_2000    0x03 // 2000 degrees/sec
 
+// FCHOICE_B 0 0 : DLPF enabled
+// FCHOICE_B X 1 : DLPF bypassed
+// FCHOICE_B 1 X : DLPF bypassed
+#define MPU9250_FCHOICE_B_0     0x00 // FCHOICE_B bit 0
+#define MPU9250_FCHOICE_B_1     0x00 // FCHOICE_B bit 1
+
+#define MPU9250_GYRO_DLPF_CFG_250HZ  0x00 // DLPF configuration for 250Hz
+#define MPU9250_GYRO_DLPF_CFG_184HZ  0x01 // DLPF configuration for 184Hz
+#define MPU9250_GYRO_DLPF_CFG_92HZ   0x02 // DLPF configuration for 92Hz
+#define MPU9250_GYRO_DLPF_CFG_41HZ   0x03 // DLPF configuration for 41Hz
+#define MPU9250_GYRO_DLPF_CFG_20HZ   0x04 // DLPF configuration for 20Hz
+#define MPU9250_GYRO_DLPF_CFG_10HZ   0x05 // DLPF configuration for 10Hz
+#define MPU9250_GYRO_DLPF_CFG_5HZ    0x06 // DLPF configuration for 5Hz
+#define MPU9250_GYRO_DLPF_CFG_3600HZ 0x07 // DLPF configuration for 3600Hz
+
 #define MPU9250_GYRO_FS_SEL_250_VALUE     ((uint16_t)250) // 250 degrees/sec 
 #define MPU9250_GYRO_FS_SEL_500_VALUE     ((uint16_t)500) // 500 degrees/sec
 #define MPU9250_GYRO_FS_SEL_1000_VALUE    ((uint16_t)1000) // 1000 degrees/sec

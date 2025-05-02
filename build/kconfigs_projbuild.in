@@ -1,6 +1,0 @@
-source "/media/diego/Diego/esp/esp-idf/components/bootloader/Kconfig.projbuild"
-source "/media/diego/Diego/esp/esp-idf/components/esp_app_format/Kconfig.projbuild"
-source "/media/diego/Diego/esp/esp-idf/components/esp_rom/Kconfig.projbuild"
-source "/media/diego/Diego/esp/esp-idf/components/esptool_py/Kconfig.projbuild"
-source "/media/diego/Diego/esp/esp-idf/components/partition_table/Kconfig.projbuild"
-source "/home/diego/workspace/ESP32-C3-MPU9250/main/Kconfig.projbuild"

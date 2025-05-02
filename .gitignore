@@ -35,3 +35,4 @@ build/esp-idf/esp_bootloader_format/CMakeFiles/__idf_esp_bootloader_format.dir/e
 build/esp-idf/main/libmain.a
 build/esp-idf/mpu9250/libmpu9250.a
 build/esp-idf/mpu9250/CMakeFiles/__idf_mpu9250.dir/mpu9250.c.obj
+/managed_components/espressif__eigen

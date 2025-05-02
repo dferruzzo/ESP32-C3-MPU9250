@@ -189,6 +189,11 @@ esp_err_t mpu9250_read_gyroscope(i2c_master_dev_handle_t dev_handle, float *gyro
 }
 
 esp_err_t mpu9250_calibrate_gyroscope(i2c_master_dev_handle_t dev_handle) {
+    
+    ESP_LOGI(TAG, "*********************************");
+    ESP_LOGI(TAG, "Starting gyroscope calibration...");
+    ESP_LOGI(TAG, "Please keep the sensor still during calibration.");
+    ESP_LOGI(TAG, "This may take a few seconds...");
 
     gyro_calibration_in_progress = true;
 
@@ -199,7 +204,7 @@ esp_err_t mpu9250_calibrate_gyroscope(i2c_master_dev_handle_t dev_handle) {
     ESP_LOGI(TAG, "Starting gyroscope calibration...");
 
     for (int i = 0; i < num_samples; i++) {
-        //ESP_LOGI("CALIBRATION","Reading gyroscope data...");
+        // ESP_LOGI("CALIBRATION","Reading gyroscope data...");
         if (mpu9250_read_gyroscope(dev_handle, gyro_data) == ESP_OK) {
         gyro_x_sum += gyro_data[0];
         gyro_y_sum += gyro_data[1];
@@ -212,13 +217,15 @@ esp_err_t mpu9250_calibrate_gyroscope(i2c_master_dev_handle_t dev_handle) {
     gyro_bias[1] = gyro_y_sum / num_samples;
     gyro_bias[2] = gyro_z_sum / num_samples;
 
-    ESP_LOGI(TAG, "Gyroscope calibration complete:");
     //ESP_LOGI(TAG, "Bias X: %.2f, Y: %.2f, Z: %.2f", *gyro_bias_ptr, *gyro_bias_ptr + 1, *gyro_bias_ptr + 2);
     ESP_LOGI(TAG, "Bias X: %.2f, Y: %.2f, Z: %.2f", gyro_bias[0], gyro_bias[1], gyro_bias[2]);
 
     gyro_cal_flag = true;
 
     gyro_calibration_in_progress = false;
+
+    ESP_LOGI(TAG, "Gyroscope calibration complete:");
+    ESP_LOGI(TAG, "*********************************");
 
     return ESP_OK;
 }

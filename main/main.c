@@ -61,37 +61,29 @@ void app_main() {
 
     // Configure gyroscope settings
 	mpu9250_configure_gyroscope(dev_handle_mpu9250, MPU9250_GYRO_FS_SEL_1000,  MPU9250_FCHOICE_B_GYRO_FILTER_ENABLED, MPU9250_GYRO_DLPF_CFG_20HZ);
+    mpu9250_calibrate_gyroscope(dev_handle_mpu9250);
 
-    // Configure accelerometer settings
+	// Configure accelerometer settings
 	mpu9250_configure_accelerometer(dev_handle_mpu9250, MPU9250_ACCEL_FS_SEL_4, MPU9250_ACCEL_FIL_EN_BW_21Hz);
 
     while(1){
         // Read gyroscope data
         
         mpu9250_read_gyroscope(dev_handle_mpu9250, gyr_data);
-		//ESP_LOGI("main ", "Gyroscope data (degrees/sec):");
-		//show_vector(gyr_data);
-
+		
         //Read acelerometer data
 
         mpu9250_read_accelerometer(dev_handle_mpu9250, acc_data);
-        //ESP_LOGI("main ", "Accelerometer data (g):");
-        //show_vector(acc_data);
-
+        
         // Read Magnetometer data
 
 		mpu9250_read_magnetometer(dev_handle_mpu9250, dev_handle_magnetometer, mag_data);
-		//ESP_LOGI("main ", "Magnetometro data (uT):");
-		//show_vector(mag_data);
-
+		
         //Read temperature data
         
         mpu9250_read_temperature(dev_handle_mpu9250, temp_data);
-        //ESP_LOGI("main ", "Temperature data (C):");
-        //show_data(temp_data, 1);
         
-        // Print data in CSV format
-        // The format is:
+        // Print data in CSV format. The format is:
         // "GyrX,GyrY, GyrZ, AccX, AccY, AccZ, MagX, MagY, MagZ, Temp"
 
         printf("%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f\n",
@@ -104,8 +96,5 @@ void app_main() {
 
         vTaskDelay(pdMS_TO_TICKS(250)); // Delay for 1 second
     }
-
-	// Deinitialize I2C using my_i2c component
-    //ESP_ERROR_CHECK(my_i2c_deinit(bus_handle));
 
 }

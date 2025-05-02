@@ -16,6 +16,8 @@ uint16_t gyro_full_scale_range[] = {
 uint8_t gyro_fs_sel = 0x00; // Full-scale range selection
 uint8_t *gyro_fs_sel_ptr = &gyro_fs_sel; // Full-scale range selection pointer
 
+float gyro_bias[3]; // Gyroscope bias structure
+
 esp_err_t mpu9250_read_register(i2c_master_dev_handle_t dev_handle, uint8_t reg_addr, uint8_t *data, size_t len) {
     return i2c_master_transmit_receive(dev_handle, &reg_addr, 1, data, len, I2C_MASTER_TIMEOUT_MS / portTICK_PERIOD_MS);
 }
@@ -163,6 +165,32 @@ esp_err_t mpu9250_read_gyroscope(i2c_master_dev_handle_t dev_handle, float *gyro
         ESP_LOGE(TAG, "Failed to read gyroscope data");
         return ESP_FAIL;
     }
+}
+
+esp_err_t mpu9250_calibrate_gyroscope(i2c_master_dev_handle_t dev_handle) {
+    int num_samples = 1000;
+    float gyro_x_sum = 0, gyro_y_sum = 0, gyro_z_sum = 0;
+    float gyro_data[3];
+
+    ESP_LOGI("CALIBRATION", "Starting gyroscope calibration...");
+
+    for (int i = 0; i < num_samples; i++) {
+        if (mpu9250_read_gyroscope(dev_handle, gyro_data) == ESP_OK) {
+            gyro_x_sum += gyro_data[0];
+            gyro_y_sum += gyro_data[1];
+            gyro_z_sum += gyro_data[2];
+        }
+        vTaskDelay(pdMS_TO_TICKS(2)); // Aguarde 2ms entre as leituras
+    }
+
+    gyro_bias[0] = gyro_x_sum / num_samples;
+    gyro_bias[1] = gyro_y_sum / num_samples;
+    gyro_bias[2] = gyro_z_sum / num_samples;
+
+    ESP_LOGI("CALIBRATION", "Gyroscope calibration complete:");
+    ESP_LOGI("CALIBRATION", "Bias X: %.2f, Y: %.2f, Z: %.2f", gyro_bias[0], gyro_bias[1], gyro_bias[2]);
+
+    return ESP_OK;
 }
 
 /*************** */

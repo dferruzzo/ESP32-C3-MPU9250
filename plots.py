@@ -1,15 +1,19 @@
 import serial
 import matplotlib.pyplot as plt
+from collections import deque
 
 ser = serial.Serial('/dev/ttyACM0', 115200)
 print("Reading data...")
 
+window_size = 100
+
 plt.ion()
 
-gyrx_data, gyry_data, gyrz_data = [], [], []
-accx_data, accy_data, accz_data = [], [], []
-magx_data, magy_data, magz_data = [], [], []
-temp_data = []
+# Use deque with a maximum length of 100 to store the last 100 samples
+gyrx_data, gyry_data, gyrz_data = deque(maxlen=window_size), deque(maxlen=window_size), deque(maxlen=window_size)
+accx_data, accy_data, accz_data = deque(maxlen=window_size), deque(maxlen=window_size), deque(maxlen=window_size)
+magx_data, magy_data, magz_data = deque(maxlen=window_size), deque(maxlen=window_size), deque(maxlen=window_size)
+temp_data = deque(maxlen=window_size)
 
 while True:
     line = ser.readline().decode('utf-8').strip()
@@ -28,6 +32,7 @@ while True:
             magz = float(data[8])
             temp = float(data[9])
             
+            # Append data to the deques
             gyrx_data.append(gyrx)
             gyry_data.append(gyry)
             gyrz_data.append(gyrz)
@@ -39,6 +44,7 @@ while True:
             magz_data.append(magz)
             temp_data.append(temp)
             
+            # Clear and plot the data
             plt.clf()
             plt.subplot(4, 1, 1)
             plt.plot(gyrx_data, label="GyrX")

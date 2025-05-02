@@ -58,7 +58,7 @@ This project is licensed under the [MIT License](LICENSE).
 - [x] Implementar os filtros (DLPF) do Giroscópio do MPU9250.
 - [x] Python script to visualize data in real-time.
 - [x] Implementar os filtros (DLPF) do Acelerômetro do MPU9250.
-- [ ] Calibrar o giroscópio.
+- [x] Calibrar o giroscópio.
 - [ ] Calibrar o acelerômetro.
 - [ ] Calibrar o magnetómetro.
 - [ ] Conectar o magnetômetro HMC5883L via I2C.

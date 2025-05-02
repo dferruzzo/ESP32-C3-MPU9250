@@ -69,32 +69,41 @@ void app_main() {
         // Read gyroscope data
         
         mpu9250_read_gyroscope(dev_handle_mpu9250, gyr_data);
-		ESP_LOGI("main ", "Gyroscope data (degrees/sec):");
-		show_vector(gyr_data);
+		//ESP_LOGI("main ", "Gyroscope data (degrees/sec):");
+		//show_vector(gyr_data);
 
         //Read acelerometer data
 
         mpu9250_read_accelerometer(dev_handle_mpu9250, acc_data);
-        ESP_LOGI("main ", "Accelerometer data (g):");
-        show_vector(acc_data);
+        //ESP_LOGI("main ", "Accelerometer data (g):");
+        //show_vector(acc_data);
 
         // Read Magnetometer data
 
 		mpu9250_read_magnetometer(dev_handle_mpu9250, dev_handle_magnetometer, mag_data);
-		ESP_LOGI("main ", "Magnetometro data (uT):");
-		show_vector(mag_data);
+		//ESP_LOGI("main ", "Magnetometro data (uT):");
+		//show_vector(mag_data);
 
         //Read temperature data
         
         mpu9250_read_temperature(dev_handle_mpu9250, temp_data);
-        ESP_LOGI("main ", "Temperature data (C):");
-        show_data(temp_data, 1);
+        //ESP_LOGI("main ", "Temperature data (C):");
+        //show_data(temp_data, 1);
+        
+        // Print data in CSV format
+        // The format is:
+        // "GyrX,GyrY, GyrZ, AccX, AccY, AccZ, MagX, MagY, MagZ, Temp"
+
+        printf("%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f\n",
+            gyr_data[0], gyr_data[1], gyr_data[2], 
+            acc_data[0], acc_data[1], acc_data[2],
+            mag_data[0], mag_data[1], mag_data[2],
+            temp_data[0]);
 
         // Delay for 0.5 second        
 
-        vTaskDelay(pdMS_TO_TICKS(500)); // Delay for 1 second
+        vTaskDelay(pdMS_TO_TICKS(250)); // Delay for 1 second
     }
-
 
 	// Deinitialize I2C using my_i2c component
     //ESP_ERROR_CHECK(my_i2c_deinit(bus_handle));

@@ -4,3 +4,5 @@ cmake_minimum_required(VERSION 3.16)
 
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(i2c-basic)
+
+idf_build_set_property(COMPILE_OPTIONS "-DUSB_CDC_ON_BOOT=1" APPEND)

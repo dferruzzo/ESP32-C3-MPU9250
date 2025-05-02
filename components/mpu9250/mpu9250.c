@@ -59,9 +59,9 @@ void mpu9250_reset(i2c_master_dev_handle_t dev_handle) {
  *       the MPU9250 sensor is connected before calling this function.
  */
 esp_err_t mpu9250_gyroscope_reset(i2c_master_dev_handle_t dev_handle) {
-    uint8_t default_gyro_config = 0x00; // Default value for gyroscope configuration register
-    if (mpu9250_write_register(dev_handle, MPU9250_GYRO_CONFIG, default_gyro_config) == ESP_OK) {
-        ESP_LOGI(TAG, "Gyroscope configuration reset to default value: 0x%02X", default_gyro_config);
+
+    if (mpu9250_write_register(dev_handle, MPU9250_GYRO_CONFIG, 0x00) == ESP_OK) {
+        ESP_LOGI(TAG, "Gyroscope configuration reset to default value: 0x%02X", 0x00);
         return ESP_OK;
     } else {
         ESP_LOGE(TAG, "Failed to reset gyroscope configuration");
@@ -91,8 +91,7 @@ esp_err_t mpu9250_gyroscope_reset(i2c_master_dev_handle_t dev_handle) {
 esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle, uint8_t fs_sel, uint8_t gyro_dlpf_cfg) {
 
     if (fs_sel > 3) {
-		ESP_LOGE(TAG, "Invalid FS_SEL value: %d. Must be between 0 and 3.",
-				fs_sel);
+		ESP_LOGE(TAG, "Invalid FS_SEL value: %d. Must be between 0 and 3.", fs_sel);
 		return ESP_FAIL;
     }
 

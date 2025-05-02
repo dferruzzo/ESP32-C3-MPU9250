@@ -26,12 +26,12 @@ void app_main() {
 
     float *gyr_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
     float *acc_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
-    float *temp_data = (float *)malloc(1 * sizeof(float));  // Allocate as single contiguous block
     float *mag_data = (float *)malloc(3 * sizeof(float));  // Allocate as single contiguous block
+    float *temp_data = (float *)malloc(1 * sizeof(float));  // Allocate as single contiguous block
 
     /* Verifica se a memoria foi alocada com sucesso */
 
-    if ((gyr_data == NULL)||(acc_data == NULL)|| (temp_data == NULL)) {
+    if ((gyr_data == NULL) || (acc_data == NULL) || (temp_data == NULL) || (mag_data == NULL)) {
         ESP_LOGE("app_main", "Failed to allocate memory for data");
         return;
     } else {
@@ -60,10 +60,10 @@ void app_main() {
     mpu9250_log_who_am_i(dev_handle_mpu9250);
 
     // Configure gyroscope settings
-	mpu9250_configure_gyroscope(dev_handle_mpu9250, MPU9250_GYRO_FS_SEL_1000, MPU9250_GYRO_DLPF_CFG_92HZ);
+	mpu9250_configure_gyroscope(dev_handle_mpu9250, MPU9250_GYRO_FS_SEL_1000,  MPU9250_FCHOICE_B_GYRO_FILTER_ENABLED, MPU9250_GYRO_DLPF_CFG_20HZ);
 
     // Configure accelerometer settings
-	mpu9250_configure_accelerometer(dev_handle_mpu9250, MPU9250_ACCEL_FS_SEL_4);
+	mpu9250_configure_accelerometer(dev_handle_mpu9250, MPU9250_ACCEL_FS_SEL_4, MPU9250_ACCEL_FIL_EN_BW_21Hz);
 
     while(1){
         // Read gyroscope data

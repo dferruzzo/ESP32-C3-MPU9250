@@ -88,13 +88,17 @@ esp_err_t mpu9250_gyroscope_reset(i2c_master_dev_handle_t dev_handle) {
  *       the MPU9250 sensor is connected before calling this function.
  * @note The `gyro_config` parameter must be set according to the MPU9250 datasheet.
  */
-esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle, uint8_t fs_sel, uint8_t gyro_dlpf_cfg) {
+esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle, uint8_t fs_sel, uint8_t enable_filter, uint8_t gyro_dlpf_cfg) {
 
     if (fs_sel > 3) {
 		ESP_LOGE(TAG, "Invalid FS_SEL value: %d. Must be between 0 and 3.", fs_sel);
 		return ESP_FAIL;
     }
 
+    if (enable_filter > 2) {
+		ESP_LOGE(TAG, "Invalid ENABLE FILTER value: %d. Must be between 0 and 2.", enable_filter);
+		return ESP_FAIL;
+    }
     // Reset the gyroscope settings
 
     mpu9250_gyroscope_reset(dev_handle); // Reset gyroscope settings
@@ -105,7 +109,7 @@ esp_err_t mpu9250_configure_gyroscope(i2c_master_dev_handle_t dev_handle, uint8_
     // with the FCHOICE_B bits (0x00 for DLPF enabled)
 
 	int8_t gyro_conf =
-		(gyro_fs_sel << 3) | (MPU9250_FCHOICE_B_1 << 1) | (MPU9250_FCHOICE_B_0);
+		(gyro_fs_sel << 3) | enable_filter;
 
 	esp_err_t ret1, ret2;
 
@@ -196,10 +200,17 @@ esp_err_t mpu9250_read_accelerometer(i2c_master_dev_handle_t dev_handle, float *
         return ESP_FAIL;
     }
 };
-esp_err_t mpu9250_configure_accelerometer(i2c_master_dev_handle_t dev_handle, uint8_t acc_fs_sel){
+
+esp_err_t mpu9250_configure_accelerometer(i2c_master_dev_handle_t dev_handle, uint8_t acc_fs_sel, uint8_t acc_dlpf_cfg) {
     if (acc_fs_sel > 3) {
         ESP_LOGE(TAG, "Invalid FS_SEL value: %d. Must be between 0 and 3.",
                 acc_fs_sel);
+        return ESP_FAIL;
+    }
+
+    if (acc_dlpf_cfg > 15) {
+        ESP_LOGE(TAG, "Invalid DLPF_CFG value: %d. Must be between 0 and 15.",
+                acc_dlpf_cfg);
         return ESP_FAIL;
     }
 
@@ -207,14 +218,26 @@ esp_err_t mpu9250_configure_accelerometer(i2c_master_dev_handle_t dev_handle, ui
 
     *acc_fs_sel_ptr = acc_fs_sel; // Set the accelerometer full-scale range based on FS_SEL
 
-    if (mpu9250_write_register(dev_handle, MPU9250_ACCEL_CONFIG, (acc_fs_sel << 3)) == ESP_OK) {
-        ESP_LOGI(TAG, "Accelerometer configured with FS_SEL = %d (value: 0x%02X)", acc_fs_sel, (acc_fs_sel << 3));
+    esp_err_t ret1, ret2;
+
+	ret1 = mpu9250_write_register(dev_handle, MPU9250_ACCEL_CONFIG,
+								(acc_fs_sel << 3));
+    ret2 = mpu9250_write_register(dev_handle, MPU9250_ACCEL_CONFIG_2,
+                                acc_dlpf_cfg); // configura DLPF
+
+	if ((ret1!= ESP_OK) && (ret2 != ESP_OK)) {
+        ESP_LOGE(TAG, "Failed to configure accelerometer or DLPF");
+        return ESP_FAIL;
+    } else if (ret1 == ESP_OK && ret2 == ESP_OK) {
+                ESP_LOGI(TAG, "Accelerometer configured with config = 0x%02X", (acc_fs_sel << 3));
+                ESP_LOGI(TAG, "Accelerometer DLPF configured with", acc_dlpf_cfg);
                 return ESP_OK;
-    } else {
-        ESP_LOGE(TAG, "Failed to configure accelerometer");
+	} else {
+        ESP_LOGE(TAG, "Failed to configure accelerometer or DLPF");
         return ESP_FAIL;
     }
 };
+
 esp_err_t mpu9250_accelerometer_reset(i2c_master_dev_handle_t dev_handle){
     uint8_t default_accel_config = 0x00; // Default value for accelerometer configuration register
     if (mpu9250_write_register(dev_handle, MPU9250_ACCEL_CONFIG, default_accel_config) == ESP_OK) {

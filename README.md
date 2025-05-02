@@ -57,7 +57,7 @@ This project is licensed under the [MIT License](LICENSE).
 - [x] Configurar o magnetômetro do MPU9250.
 - [x] Implementar os filtros (DLPF) do Giroscópio do MPU9250.
 - [x] Python script to visualize data in real-time.
-- [ ] Implementar os filtros (DLPF) do Acelerômetro do MPU9250.
+- [x] Implementar os filtros (DLPF) do Acelerômetro do MPU9250.
 - [ ] Calibrar o giroscópio.
 - [ ] Calibrar o acelerômetro.
 - [ ] Calibrar o magnetómetro.
